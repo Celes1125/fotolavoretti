@@ -1,0 +1,43 @@
+<div class="pricing-container">
+  <h2 class="main-title">FOTOLAVORRETTO</h2>
+  <p class="subtitle">Scegli il ricordo perfetto per la tua famiglia</p>
+
+  <div class="cards-grid">
+    @for (pkg of packages; track pkg.name) {
+      <div class="card" [class.highlighted]="pkg.highlight">
+        
+        <div class="card-header">
+          <h3 class="package-name">{{ pkg.name }}</h3>
+          <div class="price">
+            <span class="currency">€</span>
+            <span class="amount">{{ pkg.price }}</span>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="features-section">
+            <p class="section-label">Include:</p>
+            <ul>
+              @for (feature of pkg.features; track feature) {
+                <li>
+                  <span class="check-icon">✔</span> 
+                  {{ feature }}
+                </li>
+              }
+            </ul>
+          </div>
+
+          <div class="target-section">
+            <p class="section-label">Per chi è:</p>
+            <p class="target-text">{{ pkg.target }}</p>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <button class="cta-button">Scegli {{ pkg.name }}</button>
+        </div>
+
+      </div>
+    }
+  </div>
+</div>

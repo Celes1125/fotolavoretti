@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+
+// Import Angular Components
+import { ProductDescriptionComponent } from '../components/product-description/product-description.ts';
+import { PricingPackagesComponent } from '../components/pricing-packages/pricing-packages.ts';
+import { PricingAnimationsComponent } from '../components/pricing-animations/pricing-animations.ts';
+import { HowItWorksComponent } from '../components/how-it-works/how-it-works.ts';
+import { FaqsComponent } from '../components/faqs/faqs.ts';
+---
+
+<Layout title="Fotolavoretti - Landing Page">
+  <Header />
+  <main>
+    <section class="hero">
+      <h1>Trasformo i lavoretti dei tuoi bambini in ricordi digitali che restano</h1>
+      <p>PDF, galleria HD, video e animazioni: tutto raccolto in un ricordo ordinato, pronto da conservare e condividere.</p>
+      <a href="#" class="cta-button">Richiedi il tu fotolavoretto</a>
+    </section>
+
+    <section id="product-description">
+      <ProductDescriptionComponent client:load />
+    </section>
+
+    <section id="pricing-packages">
+      <PricingPackagesComponent client:load />
+    </section>
+
+    <section id="pricing-animations">
+      <PricingAnimationsComponent client:load />
+    </section>
+
+    <section id="how-it-works">
+      <HowItWorksComponent client:load />
+    </section>
+
+    <section id="faqs">
+      <FaqsComponent client:load />
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 4rem 1rem;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .cta-button:hover {
+    background-color: #0056b3;
+  }
+
+  section {
+    padding: 2rem 0;
+    border-bottom: 1px solid #eee;
+  }
+</style>

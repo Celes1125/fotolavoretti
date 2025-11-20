@@ -1,0 +1,31 @@
+<p>Un fotolavoretto è il modo più semplice per conservare davvero i lavoretti scolastici di tuo figlio.</p>
+<p>Prima che carta e colori si rovinino o vadano persi, </p> 
+<p>li fotografo, li organizzo e li trasformo in un ricordo digitale che dura negli anni.</p>
+
+<!-- Galería de imágenes tipo libro -->
+<div class="book-stage">
+  <div class="book-container">
+    
+    <!-- Nueva sintaxis de Angular 17+ @for -->
+    @for (sheet of sheets; track sheet.id; let i = $index) {
+      <div 
+        class="sheet"
+        [class.flipped]="sheet.flipped"
+        [style.z-index]="calculateZIndex(i, sheet.flipped)"
+        (click)="togglePage(i)"
+      >
+        <!-- Cara Frontal -->
+        <div class="page front">
+          <img [src]="sheet.frontImage" alt="Front Page">
+        </div>
+
+        <!-- Cara Trasera -->
+        <div class="page back">
+          <img [src]="sheet.backImage" alt="Back Page">
+        </div>
+      </div>
+    }
+
+  </div>
+  <p class="help-text">Toca la esquina de la página para pasar</p>
+</div>

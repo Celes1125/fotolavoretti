@@ -1,0 +1,82 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.book-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 800px;
+  background-color: #e0e0e0;
+  perspective: 2000px; /* Perspectiva para el efecto 3D */
+  overflow: hidden;
+}
+
+.book-container {
+  position: relative;
+  width: 400px;  /* Ajustar al ancho de UNA página */
+  height: 600px; /* Ajustar al alto de la imagen */
+  transform-style: preserve-3d;
+  /* Importante: desplazamos el libro a la derecha para que al abrirse quede centrado visualmente */
+  margin-right: -200px; 
+  transition: transform 0.5s;
+}
+
+/* Opcional: si todas las pags están pasadas, centrar el libro de nuevo */
+/* Esto requeriría lógica extra en TS para aplicar una clase al container, pero por ahora lo dejamos simple */
+
+.sheet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform-origin: left center; /* El eje es la izquierda de la hoja (el lomo) */
+  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+  cursor: pointer;
+}
+
+.sheet.flipped {
+  transform: rotateY(-180deg);
+}
+
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  backface-visibility: hidden; /* Esencial para que no se vea a través */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.1); /* Sombra interna para efecto papel */
+  border-radius: 2px; 
+}
+
+.page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none; /* Evita arrastrar la imagen al intentar hacer clic */
+}
+
+.front {
+  z-index: 2;
+}
+
+.back {
+  transform: rotateY(180deg); /* La parte de atrás ya está girada */
+  z-index: 1;
+  background-color: #fdfdfd;
+}
+
+.help-text {
+  margin-top: 40px;
+  color: #555;
+  font-family: sans-serif;
+}

@@ -1,0 +1,47 @@
+<div class="animations-container">
+  
+  <!-- Cabecera -->
+  <div class="header-section">
+    <h2 class="main-title">Sei venuto solo per le animazioni?</h2>
+    <p class="subtitle">(Ideale come regalo veloce, saluto speciale o contenuto per i social.)</p>
+  </div>
+
+  <!-- Grilla de videos -->
+  <div class="video-grid">
+    @for (option of animationOptions; track option.title) {
+      <div class="video-card">
+        
+        <div class="video-wrapper">
+          <!-- 
+            controls: Muestra el play/pause/volumen
+            playsinline: Importante para que en iPhone no se abra en pantalla completa forzada
+            preload="metadata": Carga solo info básica para no saturar la red
+          -->
+          <video 
+            [src]="option.videoSrc" 
+            controls 
+            playsinline
+            preload="metadata"
+            [poster]="option.posterSrc || ''">
+            Il tuo browser non supporta il video tag.
+          </video>
+        </div>
+
+        <div class="info-content">
+          <h3 class="option-title">
+            {{ option.title }}: 
+            <span class="price">{{ option.price }} €</span>
+          </h3>
+          <p class="option-desc">{{ option.description }}</p>
+        </div>
+
+      </div>
+    }
+  </div>
+
+  <!-- Pie de página -->
+  <div class="footer-section">
+    <p class="contact-text">Hai qualche altra idea in mente? Non esitare a contattarmi!</p>
+  </div>
+
+</div>
