@@ -1,23 +1,8 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import React from 'react';
+import styles from './HowItWorks.module.css';
 
-interface Step {
-  id: number;
-  title: string;
-  description: string;
-  details?: string[]; // Opcional: para las listas de opciones (puntos 2 y 4)
-}
-
-@Component({
-  selector: 'app-how-it-works',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './how-it-works.html',
-  styleUrls: ['./how-it-works.css']
-})
-export class HowItWorksComponent {
-  
-  steps: Step[] = [
+const HowItWorks = () => {
+  const steps = [
     {
       id: 1,
       title: 'Scegli il tuo pacchetto',
@@ -58,4 +43,34 @@ export class HowItWorksComponent {
       description: 'Ricevi il tuo ricordo digitale in 7–10 giorni. Se hai scelto la restituzione dei lavoretti, ti contatterò per concordare data e orario.'
     }
   ];
-}
+
+  return (
+    <div className={styles.hiwContainer}>
+      <h2 className={styles.sectionTitle}>Come funziona</h2>
+      <p className={styles.sectionSubtitle}>Il processo è semplice e veloce</p>
+
+      <div className={styles.timeline}>
+        {steps.map((step) => (
+          <div key={step.id} className={styles.timelineItem}>
+            <div className={styles.timelineMarker}>
+              <div className={styles.circle}>{step.id}</div>
+            </div>
+            <div className={styles.timelineContent}>
+              <h3 className={styles.stepTitle}>{step.title}</h3>
+              {step.description && <p className={styles.stepDesc}>{step.description}</p>}
+              {step.details && step.details.length > 0 && (
+                <ul className={styles.stepDetails}>
+                  {step.details.map((detail, index) => (
+                    <li key={index}>{detail}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default HowItWorks;

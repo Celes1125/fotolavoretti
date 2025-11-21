@@ -1,0 +1,78 @@
+.bookStage {
+  margin-top: 3rem;
+  padding: 2rem 0;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bookContainer {
+  position: relative;
+  width: 300px; /* Ancho de una página */
+  height: 400px; /* Alto de una página */
+  perspective: 1000px;
+  margin-bottom: 2rem;
+}
+
+.sheet {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
+  transform-origin: left center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.sheet.flipped {
+  transform: rotateY(-180deg);
+}
+
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: #fff; /* Fondo de las páginas */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: #333;
+}
+
+.page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.page.back {
+  transform: rotateY(180deg);
+}
+
+.helpText {
+  font-size: 0.9rem;
+  color: var(--color-secondary);
+  font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  .bookContainer {
+    width: 400px; /* Más ancho en pantallas grandes */
+    height: 533px; /* Proporcional al ancho */
+  }
+}
+
+@media (min-width: 1024px) {
+  .bookContainer {
+    width: 450px; /* Aún más ancho */
+    height: 600px;
+  }
+}

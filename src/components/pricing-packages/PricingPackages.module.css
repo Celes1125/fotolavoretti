@@ -1,0 +1,170 @@
+.pricingContainer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  text-align: center;
+  background-color: transparent;
+}
+
+.mainTitle {
+  font-size: 2.2rem;
+  color: var(--color-text);
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: var(--color-secondary);
+  margin-bottom: 4rem;
+  font-size: 1.1rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  align-items: stretch; /* Asegura que las tarjetas se estiren a la misma altura */
+}
+
+.card {
+  background: var(--color-background);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-accent);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.06);
+}
+
+.card.highlighted {
+  border: 2px solid var(--color-highlight);
+  position: relative;
+}
+
+.card.highlighted .packageName {
+  color: var(--color-highlight);
+}
+
+.cardHeader {
+  padding: 2rem 1.5rem;
+  border-bottom: 1px solid var(--color-accent);
+}
+
+.packageName {
+  font-size: 1.4rem;
+  margin: 0 0 10px 0;
+  color: var(--color-text);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.price {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: var(--color-text);
+}
+
+.currency {
+  font-size: 1.5rem;
+  margin-top: 5px;
+  color: var(--color-secondary);
+}
+
+.amount {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.cardBody {
+  padding: 2rem 1.5rem;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.sectionLabel {
+  font-weight: bold;
+  color: var(--color-secondary);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+
+.featuresSection ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.featuresSection li {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+}
+
+.checkIcon {
+  color: var(--color-secondary);
+  margin-right: 10px;
+  font-weight: bold;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.card.highlighted .checkIcon {
+  color: var(--color-highlight);
+}
+
+.targetSection {
+  background-color: var(--color-accent);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.targetText {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-secondary);
+  font-style: italic;
+}
+
+.cardFooter {
+  padding: 1.5rem;
+}
+
+.ctaButton {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--color-secondary);
+  border-radius: 50px;
+  background-color: transparent;
+  color: var(--color-secondary);
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  background-color: var(--color-secondary);
+  color: white;
+}
+
+.card.highlighted .ctaButton {
+  background-color: var(--color-highlight);
+  color: var(--color-text);
+  border-color: var(--color-highlight);
+  box-shadow: 0 4px 15px rgba(0,0,0, 0.1);
+}

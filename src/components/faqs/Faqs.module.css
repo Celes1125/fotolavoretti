@@ -1,0 +1,97 @@
+.faqContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  background-color: transparent;
+}
+
+.faqTitle {
+  text-align: center;
+  font-size: 2.2rem;
+  color: var(--color-text);
+  margin-bottom: 3rem;
+}
+
+.faqList {
+  border-top: 1px solid var(--color-accent);
+}
+
+.faqItem {
+  border-bottom: 1px solid var(--color-accent);
+  overflow: hidden;
+}
+
+/* Estilo del botón de la pregunta */
+.faqQuestion {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0.5rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-text);
+  transition: background-color 0.2s;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.faqQuestion:hover {
+  background-color: rgba(0,0,0,0.02);
+}
+
+/* Icono Flecha */
+.arrowIcon {
+  transition: transform 0.3s ease;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+/* Cuando el item tiene la clase .open, rotamos la flecha */
+.faqItem.open .arrowIcon {
+  transform: rotate(180deg);
+}
+
+/* Animación del acordeón usando max-height */
+.faqAnswerWrapper {
+  max-height: 0;
+  transition: max-height 0.4s ease-out;
+  overflow: hidden;
+}
+
+.faqItem.open .faqAnswerWrapper {
+  max-height: 600px; /* Un valor alto suficiente para contener el texto */
+  transition: max-height 0.5s ease-in;
+}
+
+.faqAnswer {
+  padding: 0 1rem 2rem 1rem;
+  color: var(--color-secondary);
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+.faqAnswer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.faqAnswer li {
+  margin-bottom: 10px;
+}
+
+.faqAnswer li:last-child {
+  margin-bottom: 0;
+}
+
+.detailLabel {
+  color: var(--color-text);
+  font-weight: 700;
+  margin-right: 5px;
+}

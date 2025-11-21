@@ -1,27 +1,8 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import React, { useState } from 'react';
+import styles from './Faqs.module.css';
 
-interface FaqDetail {
-  label?: string; // Opcional: Para la parte en negrita (ej: "Email:")
-  text: string;   // El contenido
-}
-
-interface FaqItem {
-  question: string;
-  details: FaqDetail[];
-  isOpen: boolean;
-}
-
-@Component({
-  selector: 'app-faqs',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './faqs.html',
-  styleUrls: ['./faqs.css']
-})
-export class FaqsComponent {
-  
-  faqs: FaqItem[] = [
+const Faqs = () => {
+  const [faqs, setFaqs] = useState([
     {
       question: '1. Quali sono gli orari di risposta?',
       isOpen: false,
@@ -63,15 +44,47 @@ export class FaqsComponent {
         { text: 'Pagamento elettronico tramite link.' }
       ]
     }
-  ];
+  ]);
 
-  toggleFaq(index: number) {
-    // Opción A: Permitir solo uno abierto a la vez (estilo acordeón estricto)
-    // this.faqs.forEach((faq, i) => {
-    //   if (i !== index) faq.isOpen = false;
-    // });
+  const toggleFaq = (index) => {
+    setFaqs(faqs.map((faq, i) => 
+      i === index ? { ...faq, isOpen: !faq.isOpen } : faq
+    ));
+  };
 
-    // Opción B: Permitir abrir varios (más amigable)
-    this.faqs[index].isOpen = !this.faqs[index].isOpen;
-  }
-}
+  return (
+    <div className={styles.faqContainer}>
+      <h2 className={styles.faqTitle}>FAQ – Domande Frequenti</h2>
+      
+      <div className={styles.faqList}>
+        {faqs.map((item, i) => (
+          <div key={i} className={`${styles.faqItem} ${item.isOpen ? styles.open : ''}`}>
+            <button className={styles.faqQuestion} onClick={() => toggleFaq(i)}>
+              <span>{item.question}</span>
+              <span className={styles.arrowIcon}>
+                <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L8 8L15 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+            </button>
+
+            <div className={styles.faqAnswerWrapper} style={{ maxHeight: item.isOpen ? '600px' : '0' }}>
+              <div className={styles.faqAnswer}>
+                <ul>
+                  {item.details.map((detail, j) => (
+                    <li key={j}>
+                      {detail.label && <strong className={styles.detailLabel}>{detail.label}</strong>}
+                      {detail.text}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Faqs;

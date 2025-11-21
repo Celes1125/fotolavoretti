@@ -1,0 +1,105 @@
+.hiwContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  background-color: transparent;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2.2rem;
+  color: var(--color-text);
+  margin-bottom: 10px;
+}
+
+.sectionSubtitle {
+  text-align: center;
+  color: var(--color-secondary);
+  margin-bottom: 4rem;
+  font-style: italic;
+  font-size: 1.1rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Contenedor de la línea de tiempo */
+.timeline {
+  position: relative;
+  padding: 1rem 0;
+}
+
+/* Línea vertical de fondo */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 25px; /* Start after the circle's center */
+  bottom: 25px; /* End before the last circle's center */
+  left: 24px; /* Alineado con el centro del círculo */
+  width: 2px;
+  background: var(--color-accent);
+}
+
+.timelineItem {
+  display: flex;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.timelineItem:last-child {
+  margin-bottom: 0;
+}
+
+/* El marcador (círculo con número) */
+.timelineMarker {
+  flex-shrink: 0;
+  width: 50px;
+  margin-right: 1.5rem;
+  position: relative;
+  z-index: 1; /* Para estar encima de la línea */
+}
+
+.circle {
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 4px solid var(--color-background);
+}
+
+/* Contenido del paso */
+.timelineContent {
+  padding-top: 12px; /* Alineación visual con el número */
+  width: 100%;
+}
+
+.stepTitle {
+  margin: 0 0 10px 0;
+  font-size: 1.3rem;
+  color: var(--color-text);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.stepDesc {
+  color: var(--color-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.stepDetails {
+  margin: 10px 0 0 0;
+  padding-left: 1.2rem;
+  color: var(--color-secondary);
+}
+
+.stepDetails li {
+  margin-bottom: 5px;
+  line-height: 1.5;
+}

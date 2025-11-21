@@ -1,0 +1,60 @@
+:root {
+  --color-background: #ffffff; /* Blanco puro para un lienzo limpio */
+  --color-text: #0d5293;       /* Azul oscuro, gran legibilidad */
+  --color-primary: #ddb74e;     /* Dorado, para un toque cálido y elegante */
+  --color-secondary: #176dad;   /* Azul intermedio para enlaces */
+  --color-accent: #dbd8d5;      /* Gris claro para bordes y fondos sutiles */
+
+  /* El resto de la paleta para usos específicos */
+  --color-highlight: #ddb74e;   /* Dorado */
+  --color-danger: #a12924;       /* Rojo oscuro */
+  --color-danger-soft: #e87f84; /* Rosa/Rojo claro */
+  --color-blue-light: #51a3db;
+  --color-blue-lighter: #c2e5fb;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: 'Nunito', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--color-text); /* Títulos con el azul oscuro principal */
+  font-weight: 700;
+}
+
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-text);
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 12px 28px;
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 2px solid var(--color-primary);
+}
+
+.cta-button:hover {
+  background-color: #d0a637; /* Dorado más oscuro */
+  border-color: #d0a637;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
