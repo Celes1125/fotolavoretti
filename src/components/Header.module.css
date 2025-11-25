@@ -1,15 +1,143 @@
 .header {
-  padding: 1.5rem 1rem;
-  background-color: transparent;
+  padding: 1rem 0;
+  background-color: white;
+  
+
   width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  /* backdrop-filter: blur(10px); */ /* Efecto de desenfoque para el fondo */
+  /* border-bottom: 1px solid var(--color-accent); */ /* Línea sutil en la parte inferior */
 }
+
 .container {
-  max-width: 1100px;
+  /* max-width: 1100px; */ /* Removed to allow full width */
   margin: 0 auto;
   display: flex;
-  justify-content: center; /* Centered logo */
+  justify-content: space-between; /* Espacio entre logo y nav */
+  align-items: center;
+  padding: 0 1rem; /* Added horizontal padding for spacing from edges */
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 2rem ;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo {
+  height: 80px; /* Ajustar tamaño del logo para que no sea tan grande */
+  transition: height 0.3s ease;
+}
+
+.navList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 2rem;
   align-items: center;
 }
-.logo {
-  height: 100px;
+
+.navList li a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.navList li a:hover {
+  color: var(--color-primary);
+}
+
+.ctaButton {
+  /* Estilos del botón CTA, ya definidos en global.css, pero aquí podemos añadir ajustes */
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  background-color: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.ctaButton:hover {
+  background-color: var(--color-secondary);
+}
+
+.hamburger {
+  display: none; /* Oculto por defecto en desktop */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1100; /* Asegura que esté por encima del navList cuando está abierto */
+}
+
+.hamburgerLine {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: var(--color-text);
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .logo {
+    height: 60px; /* Logo más pequeño en móvil */
+  }
+
+  .navList {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-background); /* Fondo del menú móvil */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(100%); /* Oculto por defecto */
+    transition: transform 0.3s ease-in-out;
+    z-index: 1050;
+  }
+
+  .navList.open {
+    transform: translateX(0); /* Visible cuando está abierto */
+  }
+
+  .navList li {
+    margin: 1rem 0;
+  }
+
+  .navList li a {
+    font-size: 1.5rem; /* Enlaces más grandes en móvil */
+  }
+
+  .hamburger {
+    display: block; /* Visible en móvil */
+  }
+
+  /* Animación del icono de hamburguesa */
+  .hamburger.open .hamburgerLine:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.open .hamburgerLine:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.open .hamburgerLine:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
 }

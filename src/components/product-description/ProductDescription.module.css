@@ -1,78 +1,55 @@
-.bookStage {
-  margin-top: 3rem;
-  padding: 2rem 0;
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.descriptionText {
+  text-align: center;
+  max-width: 85vw;
+  margin: auto;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  border-bottom: solid 1.5px var(--color-primary);
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-.bookContainer {
-  position: relative;
-  width: 300px; /* Ancho de una página */
-  height: 400px; /* Alto de una página */
-  perspective: 1000px;
-  margin-bottom: 2rem;
+.galleryContainer {
+  display: grid;
+  /* Adjust columns for different screen sizes for a "re linda" grid */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 2 columns on small screens */
+  gap: 0.2rem; /* Smaller gap for a tighter look */
+  width: 100%; /* Full width */
+  margin: 0 auto;
 }
 
-.sheet {
+.galleryItem {
   width: 100%;
-  height: 100%;
-  position: absolute;
-  transform-style: preserve-3d;
-  transition: transform 0.8s ease-in-out;
-  transform-origin: left center;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  border-radius: 4px;
+  padding-top: 100%; /* Square aspect ratio */
+  position: relative;
   overflow: hidden;
 }
 
-.sheet.flipped {
-  transform: rotateY(-180deg);
-}
-
-.page {
+.galleryImage {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  background-color: #fff; /* Fondo de las páginas */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-  color: #333;
-}
-
-.page img {
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.page.back {
-  transform: rotateY(180deg);
+.galleryItem:hover .galleryImage {
+  transform: scale(1.1);
 }
 
-.helpText {
-  font-size: 0.9rem;
-  color: var(--color-secondary);
-  font-style: italic;
-}
-
-/* Responsive adjustments */
+/* Media queries for more columns on larger screens */
 @media (min-width: 768px) {
-  .bookContainer {
-    width: 400px; /* Más ancho en pantallas grandes */
-    height: 533px; /* Proporcional al ancho */
+  .galleryContainer {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  .bookContainer {
-    width: 450px; /* Aún más ancho */
-    height: 600px;
+  .galleryContainer {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem; /* A bit more gap on larger screens */
   }
 }

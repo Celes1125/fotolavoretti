@@ -5,13 +5,13 @@ const PricingAnimations = () => {
   const animationOptions = [
     {
       title: 'Animazione standard',
-      price: 10,
+      price:10,
       description: 'Messaggi e voci predefinite.',
       videoSrc: '/videos/animation-standard.mp4', 
     },
     {
       title: 'Animazione personalizzata',
-      price: 15,
+      price:15,
       description: 'La voce racconta quello che desideri.',
       videoSrc: '/videos/animation-custom.mp4'
     }
@@ -41,7 +41,7 @@ const PricingAnimations = () => {
             <div className={styles.infoContent}>
               <h3 className={styles.optionTitle}>
                 {option.title}: 
-                <span className={styles.price}>{option.price} €</span>
+                <span className={styles.price}> {option.price} €</span>
               </h3>
               <p className={styles.optionDesc}>{option.description}</p>
             </div>
