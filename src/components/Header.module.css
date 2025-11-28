@@ -1,8 +1,6 @@
 .header {
   padding: 1rem 0;
-  background-color: white;
-  
-
+  background-color: white; 
   width: 100%;
   position: sticky;
   top: 0;
@@ -13,6 +11,7 @@
 
 .container {
   /* max-width: 1100px; */ /* Removed to allow full width */
+  height: 55px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between; /* Espacio entre logo y nav */
@@ -26,6 +25,7 @@
   align-items: center;
   width: 100%;
   padding-right: 2rem ;
+  border-bottom: 1px solid var(--color-blue-lighter);
 }
 
 .logoLink {
@@ -33,9 +33,14 @@
   align-items: center;
   text-decoration: none;
 }
+.logoLink p {
+  padding-left:1rem;
+  font-weight: var(--fw-medium);
+
+}
 
 .logo {
-  height: 80px; /* Ajustar tamaño del logo para que no sea tan grande */
+  height: 4rem; /* Ajustar tamaño del logo para que no sea tan grande */
   transition: height 0.3s ease;
 }
 
@@ -51,8 +56,8 @@
 .navList li a {
   text-decoration: none;
   color: var(--color-text);
-  font-weight: 600;
-  font-size: 1.2rem;
+  font-weight: var(--fw-medium);
+  font-size: var(--font-size-sm);
   transition: color 0.3s ease;
 }
 
@@ -60,20 +65,7 @@
   color: var(--color-primary);
 }
 
-.ctaButton {
-  /* Estilos del botón CTA, ya definidos en global.css, pero aquí podemos añadir ajustes */
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  background-color: var(--color-primary);
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
 
-.ctaButton:hover {
-  background-color: var(--color-secondary);
-}
 
 .hamburger {
   display: none; /* Oculto por defecto en desktop */
@@ -86,17 +78,17 @@
 
 .hamburgerLine {
   display: block;
-  width: 25px;
-  height: 3px;
+  width: 2.5rem;
+  height: 0.3rem;
   background-color: var(--color-text);
-  margin: 5px 0;
+  margin: 0.5rem 0;
   transition: all 0.3s ease;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .logo {
-    height: 60px; /* Logo más pequeño en móvil */
+    height: 6rem; /* Logo más pequeño en móvil */
   }
 
   .navList {
@@ -123,7 +115,7 @@
   }
 
   .navList li a {
-    font-size: 1.5rem; /* Enlaces más grandes en móvil */
+    font-size: var(--font-size-lg); /* Enlaces más grandes en móvil */
   }
 
   .hamburger {
@@ -132,12 +124,12 @@
 
   /* Animación del icono de hamburguesa */
   .hamburger.open .hamburgerLine:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+    transform: translateY(0.8rem) rotate(45deg);
   }
   .hamburger.open .hamburgerLine:nth-child(2) {
     opacity: 0;
   }
   .hamburger.open .hamburgerLine:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+    transform: translateY(-0.8rem) rotate(-45deg);
   }
 }

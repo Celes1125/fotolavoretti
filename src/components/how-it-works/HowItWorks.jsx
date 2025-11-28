@@ -47,7 +47,6 @@ const HowItWorks = () => {
   return (
     <div className={styles.hiwContainer}>
       <h2 className={styles.sectionTitle}>Come funziona</h2>
-      <p className={styles.sectionSubtitle}>Il processo è semplice e veloce</p>
 
       <div className={styles.timeline}>
         {steps.map((step) => (

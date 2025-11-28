@@ -11,37 +11,40 @@ import Footer from '../components/Footer.jsx';
 
 <Layout title="Fotolavoretti - Landing Page">
   <Header client:load />
-  <section class="hero">
-    <div class="hero-img-container">
-      <img src="hero.svg" alt="Mamma che guarda i lavoretti dei bambini" />
-    </div>
-    <div class="hero-content">      
-        <h1 class="hero-title">Trasformo i lavoretti dei tuoi bambini in ricordi digitali che restano</h1>
-        <p class="hero-subtitle">PDF, galleria HD, video e animazioni: tutto raccolto in un ricordo ordinato, pronto da conservare e condividere.</p>        
-        <a href="#" class="cta-button">Richiedi il tuo fotolavoretto</a>
-      
-    </div>
-  </section>
+  <section class="hero">  
+  <div class="img-container">
+        <img src="mariposa_hero.png" />
+  </div>  
+  <div class="title-container">
+          <h1 class="hero-title">Trasformo i lavoretti dei tuoi bambini in ricordi digitali che restano</h1>
+<h2 class="hero-subtitle">PDF, galleria HD, video e animazioni: tutto raccolto in un ricordo ordinato, pronto da conservare e condividere.</h2>
+  </div>
+  <div class="cta-container">
+          <a href="#" class="cta-button">PRENOTA</a>      
+</div>    
+  </section>     
   <main>
     <section id="product-description">
       <ProductDescription client:load />
-    </section>
+    </section>    
     <section id="pricing-packages">
       <PricingPackages client:load />
-    </section>
+    </section>    
     <section id="pricing-animations">
       <PricingAnimations client:load />
-    </section>
+    </section>    
     <section id="how-it-works">
       <HowItWorks client:load />
-    </section>
+    </section>    
     <section id="faqs">
       <Faqs client:load />
     </section>
-  </main>
-  <Footer client:load />
- 
+  </main>  
+  <section class="footer"> 
+  
+  <img src="ig_qr.png">  
 
+  </section>
 </Layout> 
   
 

@@ -7,7 +7,7 @@
 
 .faqTitle {
   text-align: center;
-  font-size: 2.2rem;
+  font-size: var(--font-size-md);
   color: var(--color-text);
   margin-bottom: 3rem;
 }
@@ -32,8 +32,8 @@
   border: none;
   text-align: left;
   cursor: pointer;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: var(--font-size-base);
+  font-weight: var(--fw-semibold);
   color: var(--color-text);
   transition: background-color 0.2s;
   font-family: 'Montserrat', sans-serif;
@@ -73,7 +73,7 @@
   padding: 0 1rem 2rem 1rem;
   color: var(--color-secondary);
   line-height: 1.7;
-  font-size: 1.05rem;
+  font-size: var(--font-size-sm);
 }
 
 .faqAnswer ul {

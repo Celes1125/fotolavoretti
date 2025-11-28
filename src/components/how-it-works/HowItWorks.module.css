@@ -7,17 +7,19 @@
 
 .sectionTitle {
   text-align: center;
-  font-size: 2.2rem;
+  font-size: var(--font-size-lg);
   color: var(--color-text);
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
+  padding: 0;
 }
 
 .sectionSubtitle {
+  padding: 0;
   text-align: center;
   color: var(--color-secondary);
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   font-style: italic;
-  font-size: 1.1rem;
+  font-size: var(--font-size-md);
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
@@ -82,7 +84,7 @@
 
 .stepTitle {
   margin: 0 0 10px 0;
-  font-size: 1.3rem;
+  font-size: var(--font-size-md);
   color: var(--color-text);
   font-family: 'Montserrat', sans-serif;
 }

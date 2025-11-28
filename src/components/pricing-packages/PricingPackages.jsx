@@ -38,7 +38,7 @@ const PricingPackages = () => {
 
   return (
     <div className={styles.pricingContainer}>
-      <h2 className={styles.mainTitle}>FOTOLAVORRETTO</h2>
+      <h2 className={styles.mainTitle}>FOTOLAVORETTO</h2>
       <p className={styles.subtitle}>Scegli il ricordo perfetto per la tua famiglia</p>
 
       <div className={styles.cardsGrid}>

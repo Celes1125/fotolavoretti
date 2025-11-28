@@ -5,13 +5,13 @@ const PricingAnimations = () => {
   const animationOptions = [
     {
       title: 'Animazione standard',
-      price:10,
+      price: 10,
       description: 'Messaggi e voci predefinite.',
-      videoSrc: '/videos/animation-standard.mp4', 
+      videoSrc: '/videos/animation-standard.mp4',
     },
     {
       title: 'Animazione personalizzata',
-      price:15,
+      price: 15,
       description: 'La voce racconta quello che desideri.',
       videoSrc: '/videos/animation-custom.mp4'
     }
@@ -28,9 +28,9 @@ const PricingAnimations = () => {
         {animationOptions.map((option) => (
           <div key={option.title} className={styles.videoCard}>
             <div className={styles.videoWrapper}>
-              <video 
-                src={option.videoSrc} 
-                controls 
+              <video
+                src={option.videoSrc}
+                controls
                 playsInline
                 preload="metadata"
                 poster={option.posterSrc || ''}>
@@ -40,7 +40,7 @@ const PricingAnimations = () => {
 
             <div className={styles.infoContent}>
               <h3 className={styles.optionTitle}>
-                {option.title}: 
+                {option.title}:
                 <span className={styles.price}> {option.price} €</span>
               </h3>
               <p className={styles.optionDesc}>{option.description}</p>
@@ -50,8 +50,10 @@ const PricingAnimations = () => {
       </div>
 
       <div className={styles.footerSection}>
-        <p className={styles.contactText}>Hai qualche altra idea in mente? Non esitare a contattarmi!</p>
-      </div>
+        <p className={styles.contactText}>Hai un’altra proposta o un progetto diverso? </p>
+        <button className={styles.cta}>
+          <a href="/contatto">Contattami qui</a>
+        </button>      </div>
     </div>
   );
 };

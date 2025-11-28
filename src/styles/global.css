@@ -1,37 +1,121 @@
 :root {
-  --color-background: #ffffff; /* Blanco puro para un lienzo limpio */
-  --color-text: #0d5293;       /* Azul oscuro, gran legibilidad */
-  --color-primary: #ddb74e;     /* Dorado, para un toque cálido y elegante */
-  --color-secondary: #176dad;   /* Azul intermedio para enlaces */
-  --color-accent: #dbd8d5;      /* Gris claro para bordes y fondos sutiles */
-
-  /* El resto de la paleta para usos específicos */
-  --color-highlight: #ddb74e;   /* Dorado */
-  --color-danger: #a12924;       /* Rojo oscuro */
-  --color-danger-soft: #e87f84; /* Rosa/Rojo claro */
+  /* Colors */
+  --color-background: #ffffff;
+  --color-text: #0d5293;
+  --color-primary: #ddb74e;
+  --color-secondary: #176dad;
+  --color-accent: #dbd8d5;
+  --color-highlight: #ddb74e;
+  --color-danger: #a12924;
+  --color-danger-soft: #e87f84;
   --color-blue-light: #51a3db;
   --color-blue-lighter: #c2e5fb;
+
+  /* Font Scale (Fluid Typography) */
+  /* 1rem = 10px with the html rule below */
+  --font-size-sm: clamp(1.4rem, 0.5vw + 1rem, 1.6rem);
+  /* 14px -> 16px */
+  --font-size-base: clamp(1.6rem, 1vw + 1rem, 1.8rem);
+  /* 16px -> 18px */
+  --font-size-md: clamp(1.8rem, 1.5vw + 1rem, 2.2rem);
+  /* 18px -> 22px */
+  --font-size-lg: clamp(2.4rem, 2.5vw + 1rem, 3.2rem);
+  /* 24px -> 32px */
+  --font-size-xl: clamp(3.2rem, 4vw + 1rem, 4.8rem);
+  /* 32px -> 48px */
+  --font-size-xxl: clamp(4rem, 5.5vw + 1rem, 6.4rem);
+  /* 40px -> 64px */
+
+  /* DEFINIMOS LA FAMILIA DE FUENTE */
+  --font-family-base: "Poppins", sans-serif;
+
+  /* DEFINIMOS LOS PESOS (WEIGHTS) */
+  /* Usamos nombres lógicos para recordar fácil qué es cada uno */
+  --fw-thin: 100;
+  --fw-light: 300;
+  --fw-regular: 400;
+  /* Texto normal */
+  --fw-medium: 500;
+  /* Botones o énfasis leve */
+  --fw-semibold: 600;
+  /* Subtítulos */
+  --fw-bold: 700;
+  /* Títulos importantes */
+  --fw-black: 900;
+  /* Títulos muy grandes/Hero */
+
+
+
+}
+
+/* Esto es obligatorio para que tus componentes tomen la fuente */
+button, input, textarea, select {
+  font-family: inherit;
+}
+
+/* Base font size for easy rem calculations (1rem = 10px) */
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 body {
   background-color: var(--color-background);
   color: var(--color-text);
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);  
+  font-weight: var(--fw-regular);
   margin: 0;
   padding: 0;
   line-height: 1.6;
+
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
-  color: var(--color-text); /* Títulos con el azul oscuro principal */
-  font-weight: 500;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-base);
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: var(--font-size-lg);  
+}
+
+h2 {
+  font-size: var(--font-size-md);
+  
+}
+
+h3 {
+  font-size: var(--font-size-base);
+}
+
+h4 {
+  font-size: var(--font-size-md);
+}
+
+/* Or md for more emphasis */
+h5 {
+  font-size: var(--font-size-base);
+}
+
+h6 {
+  font-size: var(--font-size-sm);
+}
+
+p {
+  font-size: var(--font-size-base);
 }
 
 a {
   color: var(--color-secondary);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: var(--fw-regular);
   transition: color 0.3s ease;
 }
 
@@ -39,75 +123,87 @@ a:hover {
   color: var(--color-text);
 }
 
+.hero {
+  position: relative;
+  width: 90%;
+  height: 80vh; /* o la altura que quieras */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* separación entre título y botón */  
+  margin: auto;
+
+}
+
+/* Imagen de fondo en cover */
+.img-container {   
+  position: absolute;  
+  margin: auto;
+  z-index: 0;
+  display: flex;
+}
+
+.img-container img {
+  width: 80%;
+  height: 80%;  
+  object-fit: cover;
+  margin-top:-180px;  
+  margin-left: auto;
+  margin-right:auto;
+  
+}
+
+/* Contenedor del contenido */
+.title-container,
+.cta-container {
+  position: relative;
+  top: 13rem;
+  width: 85vw;
+  z-index: 2;
+  text-align: center;
+  color: #000; /* Cambiá según tu diseño */
+  
+}
+
+/* Título */
+.hero-title {  
+  max-width: 80vw;
+  font-size: var(--font-size-lg);
+  font-weight: var(--fw-regular);
+  letter-spacing: -0.06em;  
+  margin: 0;
+}
+
+.hero-subtitle {  
+  max-width: 80vw;
+  font-size: var(--font-size-md);
+  font-weight: var(--fw-base);
+  letter-spacing: -0.08em;  
+  margin: 0;
+}
+
+/* Botón CTA */
 .cta-button {
-  display: inline-block;
-  padding: 12px 28px;
-  background-color: var(--color-primary);
-  color: var(--color-text);
+  padding: 14px 28px;
+  background: var(--color-primary);
+  color: white;
   text-decoration: none;
-  font-weight: 700;
-  border-radius: 50px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  border: 2px solid var(--color-primary);
-  align-self: center;
+  font-size: var(--font-size-md);
+  border-radius: 6px;
+  letter-spacing: -0.5;
+  font-weight: var(--fw-semibold);
 }
 
-.cta-button:hover {
-  background-color: #d0a637; /* Dorado más oscuro */
-  border-color: #d0a637;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+.footer {
+  width: 80vw;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
-.hero{
-height: 83vh;
-width: 100%;
-position: relative;
-overflow: hidden; 
+.footer img {
+  width: 10vw;
+  object-fit: contain;
 }
-
-.hero-img-container{
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: 0; /* Nivel de profundidad bajo */
-}
-
-.hero-img-container img {
-  width: 100%;
-height: 100%;
-object-fit: cover;
-}
-
-.hero-content {
-position: absolute;
-top: 0;
-left: 95px;
-width: 35%;
-height: 100%;
-z-index: 1; /* Por encima de la imagen */
-display: flex;
-flex-direction: column; /* Para que el título, texto y botón vayan uno debajo del otro */
-justify-content: center;
-
-}
-
-.hero-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-  line-height: 1.1;
-}
-
-.hero-subtitle{
-  font-size: clamp(1.5rem, 1.5vw, 1.2rem); /* Reducido para mejor ajuste */
-  font-weight: 400;
-  margin-bottom: 2rem;
-  line-height: 1.5;
-}
-
-
