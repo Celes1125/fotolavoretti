@@ -7,6 +7,9 @@ import PricingAnimations from '../components/pricing-animations/PricingAnimation
 import HowItWorks from '../components/how-it-works/HowItWorks.jsx';
 import Faqs from '../components/faqs/Faqs.jsx';
 import Footer from '../components/Footer.jsx';
+import HeroCta from '../components/HeroCta.jsx';
+import ContactForm from "../components/forms/ContactForm.jsx";
+import OrderForm from "../components/forms/OrderForm.jsx";
 ---
 
 <Layout title="Fotolavoretti - Landing Page">
@@ -19,13 +22,11 @@ import Footer from '../components/Footer.jsx';
           <h1 class="hero-title">Trasformo i lavoretti dei tuoi bambini in ricordi digitali che restano</h1>
 <h2 class="hero-subtitle">PDF, galleria HD, video e animazioni: tutto raccolto in un ricordo ordinato, pronto da conservare e condividere.</h2>
   </div>
-  <div class="cta-container">
-          <a href="#" class="cta-button">PRENOTA</a>      
-</div>    
+    <HeroCta client:load />
   </section>     
   <main>
-    <section id="product-description">
-      <ProductDescription client:load />
+    <section id="product-description" >
+      <ProductDescription client:load/>
     </section>    
     <section id="pricing-packages">
       <PricingPackages client:load />
@@ -45,6 +46,10 @@ import Footer from '../components/Footer.jsx';
   <img src="ig_qr.png">  
 
   </section>
+  <br>
+  <br>
+  ---
+
 </Layout> 
   
 

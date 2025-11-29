@@ -23,7 +23,7 @@ const Header = () => {
             <span className={styles.hamburgerLine}></span>
           </button>
           <ul className={`${styles.navList} ${isOpen ? styles.open : ''}`}>
-            <li><a href="#product-description-text" onClick={toggleMenu}>Servizi</a></li>
+            <li><a href="#product-description" onClick={toggleMenu}>Servizi</a></li>
             <li><a href="#how-it-works" onClick={toggleMenu}>Come funziona</a></li>
             <li><a href="#pricing-packages" onClick={toggleMenu}>Prezzi</a></li>
             <li><a href="#faqs" onClick={toggleMenu}>FAQ</a></li>

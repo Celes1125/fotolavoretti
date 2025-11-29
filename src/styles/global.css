@@ -207,3 +207,10 @@ a:hover {
   width: 10vw;
   object-fit: contain;
 }
+
+#product-description,
+#how-it-works,
+#pricing-packages,
+#faqs {
+  scroll-margin-top: 6rem;
+}

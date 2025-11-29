@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './PricingPackages.module.css';
+import Modal from '../Modal.jsx';
+import OrderForm from '../forms/OrderForm.jsx';
 
 const PricingPackages = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState('');
+
+  const packageMap = {
+    'Classico': 'Combo clásico',
+    'Completo': 'Combo completo',
+    'Premium': 'Combo premium'
+  };
+
+  const openModal = (packageName) => {
+    setSelectedPackage(packageMap[packageName]);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const packages = [
     {
       name: 'Classico',
@@ -37,47 +57,52 @@ const PricingPackages = () => {
   ];
 
   return (
-    <div className={styles.pricingContainer}>
-      <h2 className={styles.mainTitle}>FOTOLAVORETTO</h2>
-      <p className={styles.subtitle}>Scegli il ricordo perfetto per la tua famiglia</p>
+    <>
+      <div className={styles.pricingContainer}>
+        <h2 className={styles.mainTitle}>FOTOLAVORETTO</h2>
+        <p className={styles.subtitle}>Scegli il ricordo perfetto per la tua famiglia</p>
 
-      <div className={styles.cardsGrid}>
-        {packages.map((pkg) => (
-          <div key={pkg.name} className={`${styles.card} ${pkg.highlight ? styles.highlighted : ''}`}>
-            <div className={styles.cardHeader}>
-              <h3 className={styles.packageName}>{pkg.name}</h3>
-              <div className={styles.price}>
-                <span className={styles.currency}>€</span>
-                <span className={styles.amount}>{pkg.price}</span>
-              </div>
-            </div>
-
-            <div className={styles.cardBody}>
-              <div className={styles.featuresSection}>
-                <p className={styles.sectionLabel}>Include:</p>
-                <ul>
-                  {pkg.features.map((feature, index) => (
-                    <li key={index}>
-                      <span className={styles.checkIcon}>✔</span> 
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+        <div className={styles.cardsGrid}>
+          {packages.map((pkg) => (
+            <div key={pkg.name} className={`${styles.card} ${pkg.highlight ? styles.highlighted : ''}`}>
+              <div className={styles.cardHeader}>
+                <h3 className={styles.packageName}>{pkg.name}</h3>
+                <div className={styles.price}>
+                  <span className={styles.currency}>€</span>
+                  <span className={styles.amount}>{pkg.price}</span>
+                </div>
               </div>
 
-              <div className={styles.targetSection}>
-                <p className={styles.sectionLabel}>Per chi è:</p>
-                <p className={styles.targetText}>{pkg.target}</p>
+              <div className={styles.cardBody}>
+                <div className={styles.featuresSection}>
+                  <p className={styles.sectionLabel}>Include:</p>
+                  <ul>
+                    {pkg.features.map((feature, index) => (
+                      <li key={index}>
+                        <span className={styles.checkIcon}>✔</span> 
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className={styles.targetSection}>
+                  <p className={styles.sectionLabel}>Per chi è:</p>
+                  <p className={styles.targetText}>{pkg.target}</p>
+                </div>
+              </div>
+
+              <div className={styles.cardFooter}>
+                <button className={styles.ctaButton} onClick={() => openModal(pkg.name)}>Scegli {pkg.name}</button>
               </div>
             </div>
-
-            <div className={styles.cardFooter}>
-              <button className={styles.ctaButton}>Scegli {pkg.name}</button>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <OrderForm selectedPackage={selectedPackage} />
+      </Modal>
+    </>
   );
 };
 
