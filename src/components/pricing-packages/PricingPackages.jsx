@@ -6,6 +6,11 @@ import OrderForm from '../forms/OrderForm.jsx';
 const PricingPackages = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState('');
+  const [openAccordion, setOpenAccordion] = useState(null);
+
+  const toggleAccordion = (packageName) => {
+    setOpenAccordion(openAccordion === packageName ? null : packageName);
+  };
 
   const packageMap = {
     'Classico': 'Combo clásico',
@@ -41,7 +46,7 @@ const PricingPackages = () => {
         'Video MP4 con musica a scelta (per compleanni, riunioni familiari o da inviare ai nonni).'
       ],
       target: 'Per chi desidera un’esperienza più emozionante e versatile, con formato pronto da condividere su qualsiasi schermo.',
-      highlight: true 
+      highlight: true
     },
     {
       name: 'Premium',
@@ -64,36 +69,37 @@ const PricingPackages = () => {
 
         <div className={styles.cardsGrid}>
           {packages.map((pkg) => (
-            <div key={pkg.name} className={`${styles.card} ${pkg.highlight ? styles.highlighted : ''}`}>
-              <div className={styles.cardHeader}>
+            <div key={pkg.name} className={`${styles.card} ${pkg.highlight ? styles.highlighted : ''} ${openAccordion === pkg.name ? styles.open : ''}`}>
+              <div className={styles.cardHeader} onClick={() => toggleAccordion(pkg.name)}>
                 <h3 className={styles.packageName}>{pkg.name}</h3>
                 <div className={styles.price}>
                   <span className={styles.currency}>€</span>
                   <span className={styles.amount}>{pkg.price}</span>
                 </div>
               </div>
+              <div className={styles.collapsibleContent}>
+                <div className={styles.cardBody}>
+                  <div className={styles.featuresSection}>
+                    <p className={styles.sectionLabel}>Include:</p>
+                    <ul>
+                      {pkg.features.map((feature, index) => (
+                        <li key={index}>
+                          <span className={styles.checkIcon}>✔</span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-              <div className={styles.cardBody}>
-                <div className={styles.featuresSection}>
-                  <p className={styles.sectionLabel}>Include:</p>
-                  <ul>
-                    {pkg.features.map((feature, index) => (
-                      <li key={index}>
-                        <span className={styles.checkIcon}>✔</span> 
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+                  <div className={styles.targetSection}>
+                    <p className={styles.sectionLabel}>Per chi è:</p>
+                    <p className={styles.targetText}>{pkg.target}</p>
+                  </div>
                 </div>
 
-                <div className={styles.targetSection}>
-                  <p className={styles.sectionLabel}>Per chi è:</p>
-                  <p className={styles.targetText}>{pkg.target}</p>
+                <div className={styles.cardFooter}>
+                  <button className={styles.ctaButton} onClick={() => openModal(pkg.name)}>Scegli {pkg.name}</button>
                 </div>
-              </div>
-
-              <div className={styles.cardFooter}>
-                <button className={styles.ctaButton} onClick={() => openModal(pkg.name)}>Scegli {pkg.name}</button>
               </div>
             </div>
           ))}

@@ -177,3 +177,40 @@
   border-color: var(--color-highlight);
   box-shadow: 0 4px 15px rgba(0,0,0, 0.1);
 }
+
+@media (max-width: 768px) {
+  .cardsGrid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cardHeader {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .cardHeader::after {
+    content: '+';
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: var(--color-secondary);
+  }
+
+  .card.open .cardHeader::after {
+    content: '−';
+  }
+  
+  .collapsibleContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+
+  .card.open .collapsibleContent {
+    max-height: 500px; /* Adjust as needed */
+    transition: max-height 0.5s ease-in;
+  }
+}
