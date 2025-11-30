@@ -10,7 +10,7 @@ const ProductDescription = () => {
     const imagePaths = [];
     for (let i = 1; i <= totalImages; i++) {
       const padded = i.toString().padStart(3, '0');
-      imagePaths.push(`/gallery/${padded}.png`);
+      imagePaths.push(`/gallery/${padded}.jpg`);
     }
     setImages(imagePaths);
   }, [totalImages]);
