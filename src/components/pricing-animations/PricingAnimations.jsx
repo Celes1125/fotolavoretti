@@ -20,13 +20,13 @@ const PricingAnimations = () => {
       title: 'Animazione standard',
       price: 10,
       description: 'Messaggi e voci predefinite.',
-      videoSrc: '/videos/animation-standard.mp4',
+      videoSrc: '/videos/animation-standard.webm',
     },
     {
       title: 'Animazione personalizzata',
       price: 15,
       description: 'La voce racconta quello che desideri.',
-      videoSrc: '/videos/animation-custom.mp4'
+      videoSrc: '/videos/animation-custom.webm'
     }
   ];
 
