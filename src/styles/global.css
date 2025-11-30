@@ -208,6 +208,13 @@ a:hover {
   object-fit: contain;
 }
 
+/* Responsive adjustments for footer image */
+@media (max-width: 768px) {
+  .footer img {
+    width: 40vw; /* Make it larger on mobile */
+  }
+}
+
 #product-description,
 #how-it-works,
 #pricing-packages,
