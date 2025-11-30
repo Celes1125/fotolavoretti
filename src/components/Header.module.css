@@ -88,7 +88,7 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .logo {
-    height: 6rem; /* Logo más pequeño en móvil */
+    height: 3rem; /* Logo más pequeño en móvil */
   }
 
   .navList {
