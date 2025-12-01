@@ -13,18 +13,13 @@ const HowItWorks = () => {
       title: 'Decidi come inviarmi le creazioni',
       description: '',
       details: [
-        'Consegna a domicilio (solo a Cuveglio)',
-        'Consegna davanti a scuola (solo a Cuveglio)',
+        'Consegna a domicilio (solo a Cuvio e Cuveglio)',
+        'Consegna davanti a scuola (solo Cuveglio)',
         'Invia le foto se sei lontano'
       ]
     },
     {
       id: 3,
-      title: 'Prenota l’appuntamento',
-      description: 'Se scegli la consegna di persona (a domicilio o a scuola), seleziona l’orario che preferisci.'
-    },
-    {
-      id: 4,
       title: 'Decidi cosa fare con i lavoretti originali',
       description: '',
       details: [
@@ -32,6 +27,12 @@ const HowItWorks = () => {
         'Restituzione dei lavoretti'
       ]
     },
+    {
+      id: 4,
+      title: 'Attendi la nostra risposta',
+      description: 'Ti ricontattiamo per fissare un appuntamento di persona oppure per inviarti le istruzioni su come mandarci le foto se sei lontano.'
+    },
+    
     {
       id: 5,
       title: 'Produzione digitale',

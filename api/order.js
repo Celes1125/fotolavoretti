@@ -3,9 +3,10 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { name, email, service, details } = req.body || {};
+  const { name, email, package: pkg, delivery, artwork_handling, details } =
+    req.body || {};
 
-  if (!name || !email || !service || !details) {
+  if (!name || !email || !pkg || !delivery || !artwork_handling || !details) {
     return res.status(400).json({ error: "Missing fields" });
   }
 
@@ -17,15 +18,20 @@ export default async function handler(req, res) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        sender: { name: "fotolavoretti", email: "tu_correo@ejemplo.com" },
-        to: [{ email: "tu_correo@ejemplo.com" }],
-        subject: "Nuevo pedido de fotolavoretto",
+        sender: {
+          name: "fotolavoretti",
+          email: "noreply@fotolavoretti.com",
+        },
+        to: [{ email: "contact@fotolavoretti.com" }],
+        subject: "Nuovo ordine di fotolavoretto",
         htmlContent: `
-          <h2>Nuevo pedido</h2>
-          <p><b>Nombre:</b> ${name}</p>
+          <h2>Nuovo ordine</h2>
+          <p><b>Nome:</b> ${name}</p>
           <p><b>Email:</b> ${email}</p>
-          <p><b>Servicio:</b> ${service}</p>
-          <p><b>Detalles:</b> ${details}</p>
+          <p><b>Package:</b> ${pkg}</p>
+          <p><b>Delivery:</b> ${delivery}</p>
+          <p><b>Artwork Handling:</b> ${artwork_handling}</p>
+          <p><b>Dettagli:</b> ${details}</p>
         `,
       }),
     });

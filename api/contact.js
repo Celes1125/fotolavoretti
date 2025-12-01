@@ -17,14 +17,17 @@ export default async function handler(req, res) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        sender: { name: "fotolavoretti", email: "tu_correo@ejemplo.com" },
-        to: [{ email: "tu_correo@ejemplo.com" }],
-        subject: "Nuevo mensaje de contacto",
+        sender: {
+          name: "fotolavoretti",
+          email: "noreply@fotolavoretti.com",
+        },
+        to: [{ email: "contact@fotolavoretti.com" }],
+        subject: "Nuovo messaggio di contatto",
         htmlContent: `
-          <h2>Nuevo contacto</h2>
-          <p><b>Nombre:</b> ${name}</p>
+          <h2>Nuovo contatto</h2>
+          <p><b>Nome:</b> ${name}</p>
           <p><b>Email:</b> ${email}</p>
-          <p><b>Mensaje:</b> ${message}</p>
+          <p><b>Messaggio:</b> ${message}</p>
         `,
       }),
     });

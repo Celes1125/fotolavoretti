@@ -23,12 +23,12 @@ export default function ContactForm() {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <h2>Contacto</h2>
+      <h2>Contatto</h2>
 
       <input
         name="name"
         type="text"
-        placeholder="Nombre"
+        placeholder="Nome"
         value={form.name}
         onChange={handleChange}
       />
@@ -43,15 +43,15 @@ export default function ContactForm() {
 
       <textarea
         name="message"
-        placeholder="Mensaje"
+        placeholder="Messaggio"
         value={form.message}
         onChange={handleChange}
       />
 
-      <button type="submit">Enviar</button>
+      <button type="submit">Invia</button>
 
-      {status === "success" && <p className="ok">Enviado</p>}
-      {status === "error" && <p className="err">Error al enviar</p>}
+      {status === "success" && <p className="ok">Inviato</p>}
+      {status === "error" && <p className="err">Errore durante l'invio</p>}
     </form>
   );
 }
