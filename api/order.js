@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         sender: {
           name: "fotolavoretti",
-          email: "noreply@fotolavoretti.com",
+          email: "fotolavoretti@gmail.com"
         },
         to: [{ email: "contact@fotolavoretti.com" }],
         subject: "Nuovo ordine di fotolavoretto",
