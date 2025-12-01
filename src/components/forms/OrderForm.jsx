@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./form.css";
+import StatusModal from "../StatusModal";
 
 export default function OrderForm({ selectedPackage }) {
   const [form, setForm] = useState({
@@ -10,15 +11,14 @@ export default function OrderForm({ selectedPackage }) {
     artwork_handling: "",
     details: "",
   });
-
   const [status, setStatus] = useState(null);
+  const [showForm, setShowForm] = useState(true);
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus("loading");
 
     const res = await fetch("/api/order", {
       method: "POST",
@@ -26,76 +26,112 @@ export default function OrderForm({ selectedPackage }) {
       body: JSON.stringify(form),
     });
 
-    setStatus(res.ok ? "success" : "error");
+    if (res.ok) {
+      setStatus({
+        type: "success",
+        message: "Grazie per il tuo ordine, ti contatteremo al più presto.",
+      });
+    } else {
+      setStatus({
+        type: "error",
+        message:
+          "Il tuo ordine non ha potuto essere inviato, riprova più tardi. Ci scusiamo per il disagio.",
+      });
+    }
+    setShowForm(false);
+  };
+
+  const handleClose = () => {
+    setForm({
+      name: "",
+      email: "",
+      package: selectedPackage || "",
+      delivery: "",
+      artwork_handling: "",
+      details: "",
+    });
+    setStatus(null);
+    setShowForm(true);
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <h2>Ordina fotolavoretto</h2>
+    <>
+      {!showForm && status && (
+        <StatusModal
+          status={status.type}
+          message={status.message}
+          onClose={handleClose}
+        />
+      )}
 
-      <input
-        name="name"
-        type="text"
-        placeholder="Nome"
-        value={form.name}
-        onChange={handleChange}
-      />
+      {showForm && (
+        <form className="form" onSubmit={handleSubmit}>
+          <h2>Ordina fotolavoretto</h2>
 
-      <input
-        name="email"
-        type="email"
-        placeholder="Email"
-        value={form.email}
-        onChange={handleChange}
-      />
+          <input
+            name="name"
+            type="text"
+            placeholder="Nome"
+            value={form.name}
+            onChange={handleChange}
+          />
 
-      <select name="package" value={form.package} onChange={handleChange}>
-        <option value="">Seleziona un servizio</option>
-        <option value="Combo clásico">Clásico $35</option>
-        <option value="Combo completo">Completo $40</option>
-        <option value="Combo premium">Premium $50</option>
-        <option value="Animación estándar">Animazione standar $10 </option>
-        <option value="Animación personalizada">Animazione personalizzata $15</option>
-      </select>
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+          />
 
-      <select name="delivery" value={form.delivery} onChange={handleChange}>
-        <option value="">Decidi come inviarmi le creazioni</option>
-        <option value="Consegna a domicilio (solo a Cuvio e Cuveglio)">
-          Consegna a domicilio (solo a Cuvio e Cuveglio)
-        </option>
-        <option value="Consegna davanti a scuola (solo Cuveglio)">
-          Consegna davanti a scuola (solo Cuveglio)
-        </option>
-        <option value="Invia le foto se sei lontano">
-          Invia le foto se sei lontano
-        </option>
-      </select>
+          <select name="package" value={form.package} onChange={handleChange}>
+            <option value="">Seleziona un servizio</option>
+            <option value="Combo clásico">Scegli clásico $35</option>
+            <option value="Combo completo">Scegli completo $40</option>
+            <option value="Combo premium">Scegli premium $50</option>
+            <option value="Animación estándar">Animazione standar $10 </option>
+            <option value="Animación personalizada">
+              Animazione personalizzata $15
+            </option>
+          </select>
 
-      <select
-        name="artwork_handling"
-        value={form.artwork_handling}
-        onChange={handleChange}
-      >
-        <option value="">Decidi cosa fare con i lavoretti originali</option>
-        <option value="Smaltimento responsabile (senza costi aggiuntivi)">
-          Smaltimento responsabile (senza costi aggiuntivi)
-        </option>
-        <option value="Restituzione dei lavoretti">
-          Restituzione dei lavoretti
-        </option>
-      </select>
+          <select name="delivery" value={form.delivery} onChange={handleChange}>
+            <option value="">Decidi come inviarmi le creazioni</option>
+            <option value="Consegna a domicilio (solo a Cuvio e Cuveglio)">
+              Consegna a domicilio (solo a Cuvio e Cuveglio)
+            </option>
+            <option value="Consegna davanti a scuola (solo Cuveglio)">
+              Consegna davanti a scuola (solo Cuveglio)
+            </option>
+            <option value="Invia le foto se sei lontano">
+              Invia le foto se sei lontano
+            </option>
+          </select>
 
-      <textarea
-        name="details"
-        placeholder="Note aggiuntive (opzionale)"
-        value={form.details}
-        onChange={handleChange}
-      />
+          <select
+            name="artwork_handling"
+            value={form.artwork_handling}
+            onChange={handleChange}
+          >
+            <option value="">Decidi cosa fare con i lavoretti originali</option>
+            <option value="Smaltimento responsabile (senza costi aggiuntivi)">
+              Smaltimento responsabile (senza costi aggiuntivi)
+            </option>
+            <option value="Restituzione dei lavoretti">
+              Restituzione dei lavoretti
+            </option>
+          </select>
 
-      <button type="submit">Invia ordine</button>
+          <textarea
+            name="details"
+            placeholder="Note aggiuntive (opzionale)"
+            value={form.details}
+            onChange={handleChange}
+          />
 
-      {status === "success" && <p className="ok">Ordine inviato</p>}
-      {status === "error" && <p className="err">Errore durante l'invio</p>}
-    </form>
+          <button type="submit">Invia ordine</button>
+        </form>
+      )}
+    </>
   );
 }

@@ -1,0 +1,66 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(5px);
+}
+
+.modalContent {
+  background-color: var(--color-background);
+  padding: 2.5rem;
+  border-radius: 12px;
+  max-width: 450px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border: 1px solid var(--color-accent);
+}
+
+.logoContainer {
+  margin-bottom: 1.5rem;
+}
+
+.logoContainer img {
+  width: 25rem;
+  height: 25rem;
+  object-fit: contain;
+}
+
+.message {
+  font-size: var(--font-size-md);
+  color: var(--color-text);
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.message.success {
+  color: var(--color-secondary);
+}
+
+.message.error {
+  color: var(--color-danger);
+}
+
+.closeButton {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  background: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: var(--font-size-base);
+  font-weight: var(--fw-semibold);
+  transition: background-color 0.3s ease;
+}
+
+.closeButton:hover {
+  background-color: var(--color-secondary);
+}
