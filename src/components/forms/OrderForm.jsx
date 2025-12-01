@@ -31,7 +31,7 @@ export default function OrderForm({ selectedPackage }) {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <h2>Ordina ora</h2>
+      <h2>Ordina fotolavoretto</h2>
 
       <input
         name="name"
@@ -51,9 +51,9 @@ export default function OrderForm({ selectedPackage }) {
 
       <select name="package" value={form.package} onChange={handleChange}>
         <option value="">Seleziona un servizio</option>
-        <option value="Combo clásico">Scegli clásico $35</option>
-        <option value="Combo completo">Scegli completo $40</option>
-        <option value="Combo premium">Scegli premium $50</option>
+        <option value="Combo clásico">Clásico $35</option>
+        <option value="Combo completo">Completo $40</option>
+        <option value="Combo premium">Premium $50</option>
         <option value="Animación estándar">Animazione standar $10 </option>
         <option value="Animación personalizada">Animazione personalizzata $15</option>
       </select>

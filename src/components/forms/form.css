@@ -1,33 +1,93 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  max-width: 420px;
+  gap: 1.5rem;
+  /* A bit more space */
+  max-width: 500px;
+  /* A bit wider */
   width: 100%;
+  margin: 2rem auto;
+  /* Center the form */
+  padding: 2rem;
+  background-color: var(--color-background);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.form input,
+.form h2 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--fw-bold);
+  color: var(--color-secondary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.form input[type="text"],
+.form input[type="email"] {
+  border: none;
+  border-bottom: 1px solid var(--color-accent);
+  border-radius: 0;
+  padding: 1rem 0; /* Adjust padding to look good with only bottom border */
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  color: var(--color-text);
+  background-color: transparent;
+  transition: border-color 0.3s ease;
+}
+
+.form input[type="text"]:focus,
+.form input[type="email"]:focus {
+  outline: none;
+  border-bottom-color: var(--color-primary);
+  box-shadow: none;
+}
+
 .form select,
 .form textarea {
   width: 100%;
-  padding: 0.7rem;
-  border: 1px solid #ccc;
+  padding: 1rem;
+  border: 1px solid var(--color-accent);
   border-radius: 6px;
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  color: var(--color-text);
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.form select:focus,
+.form textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(221, 183, 78, 0.3);
+  /* Using the primary color with some transparency */
+}
+
+
 .form button {
-  padding: 0.8rem;
+  padding: 1.2rem;
   border: none;
-  background: #222;
+  background: var(--color-primary);
   color: white;
   cursor: pointer;
   border-radius: 6px;
+  font-size: var(--font-size-md);
+  font-weight: var(--fw-semibold);
+  transition: background-color 0.3s ease;
+}
+
+.form button:hover {
+  background-color: var(--color-secondary);
 }
 
 .ok {
-  color: green;
+  color: var(--color-secondary);
+  text-align: center;
+  font-weight: var(--fw-medium);
 }
 
 .err {
-  color: red;
+  color: var(--color-danger);
+  text-align: center;
+  font-weight: var(--fw-medium);
 }

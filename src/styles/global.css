@@ -55,8 +55,15 @@ button, input, textarea, select {
 
 /* Base font size for easy rem calculations (1rem = 10px) */
 html {
+  box-sizing: border-box;
   font-size: 62.5%;
   scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 body {
