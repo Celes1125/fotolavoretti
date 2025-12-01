@@ -11,7 +11,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    const brevoRes = await fetch("https://api.brevo.com/v3/smtp/email", {
+    // 1) Enviar email a vos con el pedido
+    const emailRes = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       headers: {
         "api-key": process.env.BREVO_API_KEY,
@@ -20,26 +21,45 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         sender: {
           name: "fotolavoretti",
-          email: "fotolavoretti@gmail.com"
+          email: "fotolavoretti@gmail.com",
         },
-        to: [{ email: "contact@fotolavoretti.com" }],
-        subject: "Nuovo ordine di fotolavoretto",
+        to: [{ email: "fotolavoretti@gmail.com" }], // si querés, cámbialo a tu gmail directo
+        subject: "Nuovo ordine",
         htmlContent: `
           <h2>Nuovo ordine</h2>
           <p><b>Nome:</b> ${name}</p>
           <p><b>Email:</b> ${email}</p>
-          <p><b>Package:</b> ${pkg}</p>
-          <p><b>Delivery:</b> ${delivery}</p>
-          <p><b>Artwork Handling:</b> ${artwork_handling}</p>
+          <p><b>Pacchetto:</b> ${pkg}</p>
+          <p><b>Consegna:</b> ${delivery}</p>
+          <p><b>Gestione dei lavoretti:</b> ${artwork_handling}</p>
           <p><b>Dettagli:</b> ${details}</p>
         `,
       }),
     });
 
-    if (!brevoRes.ok) throw new Error("Email failed");
+    if (!emailRes.ok) throw new Error("Email failed");
+
+    // 2) Guardar contacto en Brevo con atributo "NOMBRE"
+    const contactRes = await fetch("https://api.brevo.com/v3/contacts", {
+      method: "POST",
+      headers: {
+        "api-key": process.env.BREVO_API_KEY,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        attributes: {
+          NOMBRE: name,
+        },
+        updateEnabled: true,
+      }),
+    });
+
+    if (!contactRes.ok) throw new Error("Contact create/update failed");
 
     return res.status(200).json({ message: "OK" });
   } catch (e) {
+    console.error(e);
     return res.status(500).json({ error: "Server error" });
   }
 }
