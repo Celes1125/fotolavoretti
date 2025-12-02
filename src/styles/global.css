@@ -220,6 +220,44 @@ a:hover {
   .footer img {
     width: 40vw; /* Make it larger on mobile */
   }
+
+  .hero {
+    height: auto; /* Let content define height */
+    padding: 20px; /* Add some padding */
+    gap: 20px; /* Increase gap for mobile */
+    justify-content: flex-start; /* Align content from the start */
+  }
+
+  .img-container {
+    position: static; /* Remove absolute positioning */
+    width: 100%;
+    margin: 0;
+  }
+  
+  .img-container img {
+    width: 100%; 
+    height: auto; /* Maintain aspect ratio */
+    max-height: 40vh; /* Limit image height on mobile */
+    margin: 0 auto;
+    object-fit: contain; /* Ensure entire image is visible */
+  }
+
+  .title-container,
+  .cta-container {
+    position: static; /* Remove relative positioning and top adjustment */
+    width: 100%;
+    top: auto;
+  }
+
+  .hero-title {
+    font-size: var(--font-size-lg); /* Slightly larger on mobile */
+    margin-bottom: 10px;
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-md); /* Slightly larger on mobile */
+    margin-bottom: 20px;
+  }
 }
 
 #product-description,
