@@ -1,13 +1,10 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  /* A bit more space */
-  max-width: 500px;
-  /* A bit wider */
+  gap: 1.2rem; /* Reduced gap for a more compact form */
+  max-width: 650px; /* Increased max-width for better desktop layout */
   width: 100%;
   margin: 2rem auto;
-  /* Center the form */
   padding: 2rem;
   background-color: var(--color-background);
   border-radius: 8px;
@@ -19,15 +16,79 @@
   font-weight: var(--fw-bold);
   color: var(--color-secondary);
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem; /* Reduced bottom margin */
 }
 
+/* Styles for the new GDPR/Privacy section */
+.form-section {
+  background-color: #f9f9f9;
+  padding: 1rem; /* Reduced padding */
+  border-radius: 6px;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem; /* Reduced gap for more compactness */
+}
+
+.form-section h3 {
+  font-size: var(--font-size-md);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.form-section p {
+  font-size: var(--font-size-sm);
+  margin-bottom: 0.2rem; /* Reduced bottom margin for paragraphs */
+  line-height: 1.4;
+}
+
+.form-section p:first-of-type { /* Style for the paragraph containing the download link */
+  margin-bottom: 0.8rem; /* More space below the download link paragraph */
+}
+
+.form-section a { /* Style the download link as a button */
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-secondary); /* Using a secondary color for the button */
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: var(--fw-medium);
+  font-size: var(--font-size-sm);
+  transition: background-color 0.3s ease;
+}
+
+.form-section a:hover {
+  background-color: #555; /* Darker shade on hover */
+}
+
+.form-control {
+  display: flex;
+  align-items: flex-start; /* Align items to the top */
+  gap: 0.8rem;
+}
+
+.form-control label {
+  font-size: var(--font-size-sm); /* Smaller font for checkbox labels */
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.form-control input[type="checkbox"] {
+  margin-top: 2px; /* Align checkbox with the first line of text */
+  flex-shrink: 0;
+}
+
+
 .form input[type="text"],
-.form input[type="email"] {
+.form input[type="email"],
+.form input[type="tel"] { /* Added tel type */
   border: none;
   border-bottom: 1px solid var(--color-accent);
   border-radius: 0;
-  padding: 1rem 0; /* Adjust padding to look good with only bottom border */
+  padding: 1rem 0;
   font-size: var(--font-size-base);
   font-family: var(--font-family-base);
   color: var(--color-text);
@@ -36,7 +97,8 @@
 }
 
 .form input[type="text"]:focus,
-.form input[type="email"]:focus {
+.form input[type="email"]:focus,
+.form input[type="tel"]:focus { /* Added tel type */
   outline: none;
   border-bottom-color: var(--color-primary);
   box-shadow: none;
@@ -60,9 +122,7 @@
   outline: none;
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(221, 183, 78, 0.3);
-  /* Using the primary color with some transparency */
 }
-
 
 .form button {
   padding: 1.2rem;
@@ -74,6 +134,7 @@
   font-size: var(--font-size-md);
   font-weight: var(--fw-semibold);
   transition: background-color 0.3s ease;
+  margin-top: 1rem; /* Add some space before the button */
 }
 
 .form button:hover {

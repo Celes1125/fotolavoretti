@@ -3,12 +3,38 @@ import "./form.css";
 import StatusModal from "../StatusModal";
 
 export default function ContactForm() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+    phone: "",
+    timeSlot: "",
+    language: "italiano",
+    wantsPhoneContact: false, // Consolidated state
+  });
   const [status, setStatus] = useState(null);
   const [showForm, setShowForm] = useState(true);
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  // Unified change handler for all inputs
+  const handleChange = (e) => {
+    const { name, type, checked, value } = e.target;
+    const isPhoneContactCheckbox = name === "wantsPhoneContact";
+
+    setForm((prevForm) => {
+      const newForm = {
+        ...prevForm,
+        [name]: type === "checkbox" ? checked : value,
+      };
+
+      // If the phone contact checkbox is unchecked, clear phone and timeSlot
+      if (isPhoneContactCheckbox && !checked) {
+        newForm.phone = "";
+        newForm.timeSlot = "";
+      }
+
+      return newForm;
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,7 +61,15 @@ export default function ContactForm() {
   };
 
   const handleClose = () => {
-    setForm({ name: "", email: "", message: "" });
+    setForm({
+      name: "",
+      email: "",
+      message: "",
+      phone: "",
+      timeSlot: "",
+      language: "italiano",
+      wantsPhoneContact: false,
+    });
     setStatus(null);
     setShowForm(true);
   };
@@ -70,9 +104,57 @@ export default function ContactForm() {
             onChange={handleChange}
           />
 
+          <div className="form-control">
+            <label>
+              <input
+                type="checkbox"
+                name="wantsPhoneContact"
+                checked={form.wantsPhoneContact}
+                onChange={handleChange}
+              />
+              Desideri essere contattato telefonicamente?
+            </label>
+          </div>
+
+          {form.wantsPhoneContact && (
+            <>
+              <input
+                name="phone"
+                type="tel"
+                placeholder="Numero di telefono"
+                value={form.phone}
+                onChange={handleChange}
+                required
+              />
+              <input
+                name="timeSlot"
+                type="text"
+                placeholder="Fascia oraria di preferenza (es. 9-12)"
+                value={form.timeSlot}
+                onChange={handleChange}
+                required
+              />
+            </>
+          )}
+
+          <div className="form-control">
+            <label htmlFor="language-select">Lingua di preferenza per il contatto:</label>
+            <select
+              id="language-select"
+              name="language"
+              value={form.language}
+              onChange={handleChange}
+              required
+            >
+              <option value="italiano">Italiano</option>
+              <option value="spagnolo">Spagnolo</option>
+              <option value="inglese">Inglese</option>
+            </select>
+          </div>
+
           <textarea
             name="message"
-            placeholder="Messaggio"
+            placeholder="Scrivi il tuo messagio"
             value={form.message}
             onChange={handleChange}
           />

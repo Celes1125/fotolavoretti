@@ -12,13 +12,15 @@
 }
 
 .modalContent {
-  background-color: white;
+  background-color: var(--color-background); /* Match form background */
   padding: 2rem;
   border-radius: 8px;
-  max-width: 500px;
+  max-width: 650px; /* Match form width */
   width: 90%;
   position: relative;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 90vh; /* Limit height to 90% of viewport height */
+  overflow-y: auto; /* Add vertical scroll when content overflows */
 }
 
 .closeButton {

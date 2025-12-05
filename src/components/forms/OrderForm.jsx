@@ -10,15 +10,51 @@ export default function OrderForm({ selectedPackage }) {
     delivery: "",
     artwork_handling: "",
     details: "",
+    phone: "",
+    timeSlot: "",
+    language: "italiano",
+    wantsPhoneContact: false, // Consolidated state
+    gdprConsent: false,
+    dataProcessingConsent: false,
+    portfolioConsent: false,
+    photoProcessingConsent: false,
   });
   const [status, setStatus] = useState(null);
   const [showForm, setShowForm] = useState(true);
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  // Unified change handler for all inputs
+  const handleChange = (e) => {
+    const { name, type, checked, value } = e.target;
+    const isPhoneContactCheckbox = name === "wantsPhoneContact";
+
+    setForm((prevForm) => {
+      const newForm = {
+        ...prevForm,
+        [name]: type === "checkbox" ? checked : value,
+      };
+
+      // If the phone contact checkbox is unchecked, clear phone and timeSlot
+      if (isPhoneContactCheckbox && !checked) {
+        newForm.phone = "";
+        newForm.timeSlot = "";
+      }
+
+      return newForm;
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate mandatory consents
+    if (!form.gdprConsent || !form.dataProcessingConsent) {
+      setStatus({
+        type: "error",
+        message: "Devi accettare l'Informativa sul trattamento dei dati personali e il consenso al trattamento dei dati per poter inviare l'ordine.",
+      });
+      setShowForm(false);
+      return;
+    }
 
     const res = await fetch("/api/order", {
       method: "POST",
@@ -49,6 +85,14 @@ export default function OrderForm({ selectedPackage }) {
       delivery: "",
       artwork_handling: "",
       details: "",
+      phone: "",
+      timeSlot: "",
+      language: "italiano",
+      wantsPhoneContact: false,
+      gdprConsent: false,
+      dataProcessingConsent: false,
+      portfolioConsent: false,
+      photoProcessingConsent: false,
     });
     setStatus(null);
     setShowForm(true);
@@ -83,6 +127,54 @@ export default function OrderForm({ selectedPackage }) {
             value={form.email}
             onChange={handleChange}
           />
+
+          <div className="form-control">
+            <label>
+              <input
+                type="checkbox"
+                name="wantsPhoneContact"
+                checked={form.wantsPhoneContact}
+                onChange={handleChange}
+              />
+              Desideri essere contattato telefonicamente?
+            </label>
+          </div>
+
+          {form.wantsPhoneContact && (
+            <>
+              <input
+                name="phone"
+                type="tel"
+                placeholder="Numero di telefono"
+                value={form.phone}
+                onChange={handleChange}
+                required
+              />
+              <input
+                name="timeSlot"
+                type="text"
+                placeholder="Fascia oraria di preferenza (es. 9-12)"
+                value={form.timeSlot}
+                onChange={handleChange}
+                required
+              />
+            </>
+          )}
+
+          <div className="form-control">
+            <label htmlFor="language-select-order">Lingua di preferenza per il contatto:</label>
+            <select
+              id="language-select-order"
+              name="language"
+              value={form.language}
+              onChange={handleChange}
+              required
+            >
+              <option value="italiano">Italiano</option>
+              <option value="spagnolo">Spagnolo</option>
+              <option value="inglese">Inglese</option>
+            </select>
+          </div>
 
           <select name="package" value={form.package} onChange={handleChange}>
             <option value="">Seleziona un servizio</option>
@@ -121,6 +213,73 @@ export default function OrderForm({ selectedPackage }) {
               Restituzione dei lavoretti
             </option>
           </select>
+
+          {/* GDPR and Privacy Section */}
+          <div className="form-section">
+            <h3>Consenso Privacy e GDPR</h3>
+            <p>
+              Scarica l'informativa completa:{" "}
+              <a
+                href="/informativa_GDPR_privacy_fotolavoretti.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Informativa GDPR e Privacy
+              </a>
+            </p>
+
+            {/* Mandatory Checkboxes */}
+            <p>Obbligatorie:</p>
+            <div className="form-control">
+              <label>
+                <input
+                  type="checkbox"
+                  name="gdprConsent"
+                  checked={form.gdprConsent}
+                  onChange={handleChange}
+                  required
+                />
+                Ho letto e compreso l’Informativa GDPR e la Privacy Policy di fotolavoretti.
+              </label>
+            </div>
+            <div className="form-control">
+              <label>
+                <input
+                  type="checkbox"
+                  name="dataProcessingConsent"
+                  checked={form.dataProcessingConsent}
+                  onChange={handleChange}
+                  required
+                />
+                Acconsento al trattamento dei miei dati e dei dati del minore, se forniti, per la gestione della richiesta e dei prodotti richiesti.
+              </label>
+            </div>
+
+            {/* Optional Checkboxes */}
+            <p>Opzionali:</p>
+            <div className="form-control">
+              <label>
+                <input
+                  type="checkbox"
+                  name="portfolioConsent"
+                  checked={form.portfolioConsent}
+                  onChange={handleChange}
+                />
+                Acconsento all’uso delle immagini dei lavoretti sui social di fotolavoretti, in forma anonimizzata.
+              </label>
+            </div>
+            <div className="form-control">
+              <label>
+                <input
+                  type="checkbox"
+                  name="photoProcessingConsent"
+                  checked={form.photoProcessingConsent}
+                  onChange={handleChange}
+                />
+                Acconsento all’uso della fotografia del minore, qualora venga fornita, esclusivamente nel prodotto richiesto. Le fotografie del minore non saranno mai utilizzate sui social.
+              </label>
+            </div>
+          </div>
 
           <textarea
             name="details"
