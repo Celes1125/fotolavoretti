@@ -4,12 +4,12 @@ export const prerender = false;
 export async function POST({ request }) {
   const data = await request.json();
 
-  const { 
-    name, 
-    email, 
-    package: pkg, 
-    delivery, 
-    artwork_handling, 
+  const {
+    name,
+    email,
+    package: pkg,
+    delivery,
+    artwork_handling,
     details,
     phone,
     timeSlot,
@@ -17,26 +17,45 @@ export async function POST({ request }) {
     gdprConsent,
     dataProcessingConsent,
     portfolioConsent,
-    photoProcessingConsent
+    photoProcessingConsent,
+    address,
+    deliveryTime,
   } = data || {};
 
-  // Updated validation: details is optional.
-  if (!name || !email || !pkg || !delivery || !artwork_handling) {
-    return new Response(JSON.stringify({ error: "Missing required fields" }), { status: 400 });
-  }
-  
-  // Mandatory consents must be true
-  if (!gdprConsent || !dataProcessingConsent) {
-    return new Response(JSON.stringify({ error: "Mandatory consents are required" }), { status: 400 });
+  // Base validation
+  if (!name || !email || !pkg || !delivery || !artwork_handling || !phone || !timeSlot) {
+    return new Response(JSON.stringify({ error: "Missing required fields" }), {
+      status: 400,
+    });
   }
 
-  // Conditionally build phone contact info
-  const phoneContactInfo = phone
-    ? `
-    <p><b>Telefono:</b> ${phone}</p>
-    <p><b>Fascia oraria:</b> ${timeSlot}</p>
+  // Conditional validation for home delivery
+  if (
+    delivery === "Consegna a domicilio (solo a Cuvio e Cuveglio)" &&
+    (!address || !deliveryTime)
+  ) {
+    return new Response(
+      JSON.stringify({ error: "Address and delivery time are required for home delivery" }),
+      { status: 400 },
+    );
+  }
+
+  // Mandatory consents must be true
+  if (!gdprConsent || !dataProcessingConsent) {
+    return new Response(
+      JSON.stringify({ error: "Mandatory consents are required" }),
+      { status: 400 },
+    );
+  }
+  
+  // Conditionally build home delivery info
+  const homeDeliveryInfo =
+    delivery === "Consegna a domicilio (solo a Cuvio e Cuveglio)"
+      ? `
+    <p><b>Indirizzo di consegna:</b> ${address}</p>
+    <p><b>Orario di consegna:</b> ${deliveryTime}</p>
     `
-    : "";
+      : "";
 
   try {
     // 1) Enviar email a vos con el pedido
@@ -51,26 +70,36 @@ export async function POST({ request }) {
           name: "fotolavoretti",
           email: "fotolavoretti@gmail.com",
         },
-        to: [{ email: "fotolavoretti@gmail.com" }], // si querés, cámbialo a tu gmail directo
+        to: [{ email: "fotolavoretti@gmail.com" }],
         subject: "Nuovo ordine",
         htmlContent: `
           <h2>Nuovo ordine</h2>
           <p><b>Nome:</b> ${name}</p>
           <p><b>Email:</b> ${email}</p>
           <p><b>Lingua preferita:</b> ${language}</p>
-          ${phoneContactInfo}
+          <p><b>Telefono:</b> ${phone}</p>
+          <p><b>Fascia oraria per contatto:</b> ${timeSlot}</p>
           <hr>
           <h3>Dettagli dell'ordine</h3>
           <p><b>Pacchetto:</b> ${pkg}</p>
           <p><b>Consegna:</b> ${delivery}</p>
+          ${homeDeliveryInfo}
           <p><b>Gestione dei lavoretti:</b> ${artwork_handling}</p>
-          <p><b>Dettagli:</b> ${details || 'Nessuno'}</p>
+          <p><b>Dettagli:</b> ${details || "Nessuno"}</p>
           <hr>
           <h3>Consensi GDPR</h3>
-          <p><b>Ho letto e compreso l’Informativa GDPR e la Privacy Policy:</b> ${gdprConsent ? 'Sì' : 'No'}</p>
-          <p><b>Acconsento al trattamento dei miei dati e dei dati del minore per la gestione della richiesta:</b> ${dataProcessingConsent ? 'Sì' : 'No'}</p>
-          <p><b>Acconsento all’uso delle immagini dei lavoretti sui social (anonimizzato):</b> ${portfolioConsent ? 'Sì' : 'No'}</p>
-          <p><b>Acconsento all’uso della fotografia del minore, qualora venga fornita, esclusivamente nel prodotto richiesto. Le fotografie del minore non saranno mai utilizzate sui social.</b> ${photoProcessingConsent ? 'Sì' : 'No'}</p>
+          <p><b>Ho letto e compreso l’Informativa GDPR e la Privacy Policy:</b> ${
+            gdprConsent ? "Sì" : "No"
+          }</p>
+          <p><b>Acconsento al trattamento dei miei dati e del minore per la gestione della richiesta:</b> ${
+            dataProcessingConsent ? "Sì" : "No"
+          }</p>
+          <p><b>Acconsento all’uso delle immagini dei lavoretti sui social (anonimizzato):</b> ${
+            portfolioConsent ? "Sì" : "No"
+          }</p>
+          <p><b>Acconsento all’uso della fotografia del minore, se fornita, solo nel prodotto richiesto:</b> ${
+            photoProcessingConsent ? "Sì" : "No"
+          }</p>
         `,
       }),
     });
@@ -81,20 +110,25 @@ export async function POST({ request }) {
       throw new Error("Email failed");
     }
 
-    // 2) Guardar contacto en Brevo con atributo "NOMBRE"
+    // 2) Guardar contacto en Brevo
+    const contactPayload = {
+      email,
+      attributes: {
+        NOMBRE: name,
+      },
+      updateEnabled: true,
+    };
+    if (phone) {
+      contactPayload.attributes.SMS = phone;
+    }
+    
     const contactRes = await fetch("https://api.brevo.com/v3/contacts", {
       method: "POST",
       headers: {
         "api-key": import.meta.env.BREVO_API_KEY,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email,
-        attributes: {
-          NOMBRE: name,
-        },
-        updateEnabled: true,
-      }),
+      body: JSON.stringify(contactPayload),
     });
 
     if (!contactRes.ok) {
@@ -104,10 +138,11 @@ export async function POST({ request }) {
     }
 
     return new Response(JSON.stringify({ message: "OK" }), { status: 200 });
-
   } catch (e) {
     console.error(e);
-    return new Response(JSON.stringify({ error: "Server error" }), { status: 500 });
+    return new Response(JSON.stringify({ error: "Server error" }), {
+      status: 500,
+    });
   }
 }
 

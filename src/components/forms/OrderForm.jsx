@@ -13,11 +13,12 @@ export default function OrderForm({ selectedPackage }) {
     phone: "",
     timeSlot: "",
     language: "italiano",
-    wantsPhoneContact: false, // Consolidated state
     gdprConsent: false,
     dataProcessingConsent: false,
     portfolioConsent: false,
     photoProcessingConsent: false,
+    address: "",
+    deliveryTime: "",
   });
   const [status, setStatus] = useState(null);
   const [showForm, setShowForm] = useState(true);
@@ -25,18 +26,19 @@ export default function OrderForm({ selectedPackage }) {
   // Unified change handler for all inputs
   const handleChange = (e) => {
     const { name, type, checked, value } = e.target;
-    const isPhoneContactCheckbox = name === "wantsPhoneContact";
-
     setForm((prevForm) => {
       const newForm = {
         ...prevForm,
         [name]: type === "checkbox" ? checked : value,
       };
 
-      // If the phone contact checkbox is unchecked, clear phone and timeSlot
-      if (isPhoneContactCheckbox && !checked) {
-        newForm.phone = "";
-        newForm.timeSlot = "";
+      // If delivery method is not home delivery, clear address and delivery time
+      if (
+        name === "delivery" &&
+        value !== "Consegna a domicilio (solo a Cuvio e Cuveglio)"
+      ) {
+        newForm.address = "";
+        newForm.deliveryTime = "";
       }
 
       return newForm;
@@ -50,7 +52,8 @@ export default function OrderForm({ selectedPackage }) {
     if (!form.gdprConsent || !form.dataProcessingConsent) {
       setStatus({
         type: "error",
-        message: "Devi accettare l'Informativa sul trattamento dei dati personali e il consenso al trattamento dei dati per poter inviare l'ordine.",
+        message:
+          "Devi accettare l'Informativa sul trattamento dei dati personali e il consenso al trattamento dei dati per poter inviare l'ordine.",
       });
       setShowForm(false);
       return;
@@ -88,11 +91,12 @@ export default function OrderForm({ selectedPackage }) {
       phone: "",
       timeSlot: "",
       language: "italiano",
-      wantsPhoneContact: false,
       gdprConsent: false,
       dataProcessingConsent: false,
       portfolioConsent: false,
       photoProcessingConsent: false,
+      address: "",
+      deliveryTime: "",
     });
     setStatus(null);
     setShowForm(true);
@@ -128,41 +132,27 @@ export default function OrderForm({ selectedPackage }) {
             onChange={handleChange}
           />
 
+          <input
+            name="phone"
+            type="tel"
+            placeholder="Numero di telefono"
+            value={form.phone}
+            onChange={handleChange}
+            required
+          />
+          <input
+            name="timeSlot"
+            type="text"
+            placeholder="Fascia oraria di preferenza (es. 9-12)"
+            value={form.timeSlot}
+            onChange={handleChange}
+            required
+          />
+
           <div className="form-control">
-            <label>
-              <input
-                type="checkbox"
-                name="wantsPhoneContact"
-                checked={form.wantsPhoneContact}
-                onChange={handleChange}
-              />
-              Desideri essere contattato telefonicamente?
+            <label htmlFor="language-select-order">
+              Lingua di preferenza per il contatto:
             </label>
-          </div>
-
-          {form.wantsPhoneContact && (
-            <>
-              <input
-                name="phone"
-                type="tel"
-                placeholder="Numero di telefono"
-                value={form.phone}
-                onChange={handleChange}
-                required
-              />
-              <input
-                name="timeSlot"
-                type="text"
-                placeholder="Fascia oraria di preferenza (es. 9-12)"
-                value={form.timeSlot}
-                onChange={handleChange}
-                required
-              />
-            </>
-          )}
-
-          <div className="form-control">
-            <label htmlFor="language-select-order">Lingua di preferenza per il contatto:</label>
             <select
               id="language-select-order"
               name="language"
@@ -199,6 +189,32 @@ export default function OrderForm({ selectedPackage }) {
               Invia le foto se sei lontano
             </option>
           </select>
+
+          {form.delivery ===
+            "Consegna a domicilio (solo a Cuvio e Cuveglio)" && (
+            <>
+              <input
+                name="address"
+                type="text"
+                placeholder="Indirizzo di consegna"
+                value={form.address}
+                onChange={handleChange}
+                required
+              />
+              <select
+                name="deliveryTime"
+                value={form.deliveryTime}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Scegli l'orario di preferenza</option>
+                <option value="mattina">Mattina</option>
+                <option value="pomeriggio">Pomeriggio</option>
+                <option value="sera">Sera</option>
+                <option value="indifferente">Indifferente</option>
+              </select>
+            </>
+          )}
 
           <select
             name="artwork_handling"
@@ -239,7 +255,8 @@ export default function OrderForm({ selectedPackage }) {
                   onChange={handleChange}
                   required
                 />
-                Ho letto e compreso l’Informativa GDPR e la Privacy Policy di fotolavoretti.
+                Ho letto e compreso l’Informativa GDPR e la Privacy Policy di
+                fotolavoretti.
               </label>
             </div>
             <div className="form-control">
@@ -251,7 +268,9 @@ export default function OrderForm({ selectedPackage }) {
                   onChange={handleChange}
                   required
                 />
-                Acconsento al trattamento dei miei dati e dei dati del minore, se forniti, per la gestione della richiesta e dei prodotti richiesti.
+                Acconsento al trattamento dei miei dati e dei dati del minore,
+                se forniti, per la gestione della richiesta e dei prodotti
+                richiesti.
               </label>
             </div>
 
@@ -265,7 +284,8 @@ export default function OrderForm({ selectedPackage }) {
                   checked={form.portfolioConsent}
                   onChange={handleChange}
                 />
-                Acconsento all’uso delle immagini dei lavoretti sui social di fotolavoretti, in forma anonimizzata.
+                Acconsento all’uso delle immagini dei lavoretti sui social di
+                fotolavoretti, in forma anonimizzata.
               </label>
             </div>
             <div className="form-control">
@@ -276,7 +296,9 @@ export default function OrderForm({ selectedPackage }) {
                   checked={form.photoProcessingConsent}
                   onChange={handleChange}
                 />
-                Acconsento all’uso della fotografia del minore, qualora venga fornita, esclusivamente nel prodotto richiesto. Le fotografie del minore non saranno mai utilizzate sui social.
+                Acconsento all’uso della fotografia del minore, qualora venga
+                fornita, esclusivamente nel prodotto richiesto. Le fotografie
+                del minore non saranno mai utilizzate sui social.
               </label>
             </div>
           </div>
