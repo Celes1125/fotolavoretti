@@ -15,7 +15,7 @@ const Faqs = () => {
       question: '2. Quali sono i tempi di consegna?',
       isOpen: false,
       details: [
-        { label: 'Standard:', text: '7–10 giorni dal ricevimento dei lavoretti. Animazioni 2 giorni.' },
+        { label: 'Standard:', text: '7–10 giorni dal ricevimento dei lavoretti. Animazioni 2-5 giorni.' },
         { label: 'Alta richiesta:', text: 'in caso di picchi, avviso anticipato per un possibile prolungamento di 2–3 giorni.' }
       ]
     },
@@ -23,8 +23,8 @@ const Faqs = () => {
       question: '3. Come funziona il ritiro e la restituzione dei lavoretti?',
       isOpen: false,
       details: [
-        { label: 'Zona coperta:', text: 'solo all’interno del Comune di Cuveglio.' },
-        { label: 'Ritiro:', text: 'su appuntamento, generalmente all’uscita della scuola o a domicilio se più comodo.' },
+        { label: 'Zona coperta:', text: 'Cuvio e Cuveglio.' },
+        { label: 'Ritiro:', text: 'su appuntamento, generalmente all’uscita della scuola (Cuveglio) o a domicilio se più comodo.' },
         { label: 'Restituzione:', text: 'Se vuoi conservarli, te li riconsegno subito. Se non vuoi tenerli, me ne occupo io in modo responsabile, senza costi aggiuntivi.' }
       ]
     },
