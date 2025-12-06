@@ -110,36 +110,41 @@ export async function POST({ request }) {
       throw new Error("Email failed");
     }
 
-    // 2) Guardar contacto en Brevo
-    const contactPayload = {
-      email,
-      attributes: {
-        NOMBRE: name,
-      },
-      updateEnabled: true,
-    };
-    if (phone) {
-      contactPayload.attributes.SMS = phone;
-    }
-    
-    const contactRes = await fetch("https://api.brevo.com/v3/contacts", {
-      method: "POST",
-      headers: {
-        "api-key": import.meta.env.BREVO_API_KEY,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(contactPayload),
-    });
+    // 2) Guardar contacto en Brevo (optional step)
+    try {
+      const contactPayload = {
+        email,
+        attributes: {
+          NOMBRE: name,
+        },
+        updateEnabled: true,
+      };
+      if (phone) {
+        contactPayload.attributes.SMS = phone;
+      }
+      
+      const contactRes = await fetch("https://api.brevo.com/v3/contacts", {
+        method: "POST",
+        headers: {
+          "api-key": import.meta.env.BREVO_API_KEY,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(contactPayload),
+      });
 
-    if (!contactRes.ok) {
-      const errorBody = await contactRes.json();
-      console.error("Brevo contact API error:", errorBody);
-      throw new Error("Contact create/update failed");
+      if (!contactRes.ok) {
+        const errorBody = await contactRes.json();
+        console.error("Brevo contact API error:", errorBody);
+        // Do not re-throw, just log the error
+      }
+    } catch (contactError) {
+      console.error("Failed to create/update Brevo contact:", contactError);
+      // Do not re-throw, just log the error
     }
 
     return new Response(JSON.stringify({ message: "OK" }), { status: 200 });
   } catch (e) {
-    console.error(e);
+    console.error("Main API error:", e);
     return new Response(JSON.stringify({ error: "Server error" }), {
       status: 500,
     });
