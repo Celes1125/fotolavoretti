@@ -41,15 +41,51 @@ import OrderForm from "../components/forms/OrderForm.jsx";
       <Faqs client:load />
     </section>
   </main>  
-  <section class="footer"> 
-  
-  <img src="ig_qr.png">  
-
+  <section class="footer">
+    <img src="ig_qr.png" alt="QR Code per Instagram">
+    <div class="footer-links">
+      <a href="/terms-of-service">Termini del servizio</a>
+      <a href="/privacy-policy">Privacy e GDPR</a>
+      <a href="/cookie-policy">Cookie policy</a>
+      <a href="/politica-di-cancellazione">Politica di Cancellazione</a>
+    </div>
   </section>
   <br>
   <br>
   ---
 
-</Layout> 
-  
+</Layout>
 
+<style>
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: 4rem;
+    text-align: center;
+  }
+
+  .footer img {
+    max-width: 150px;
+    height: auto;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem; /* Increased gap for better spacing in a row */
+    font-size: 0.9rem;
+  }
+
+  .footer-links a {
+    color: var(--text-color, #333);
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    text-decoration: underline;
+  }
+</style>
