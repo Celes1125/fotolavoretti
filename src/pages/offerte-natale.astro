@@ -2,32 +2,291 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Offerta Speciale Natale">
-  <main class="container">
-    <h1>Card di Natale Personalizzate</h1>
-    <p>
-      Questa pagina conterrà i dettagli completi dell'offerta per le card di Natale e i moduli per effettuare l'ordine.
-    </p>
-    <p>
-      A breve disponibile!
-    </p>
+<Layout title="Offerta Speciale Natale" breadcrumbs={[{ text: 'Home', href: '/' }, { text: 'Offerta Speciale Natale', href: '/offerte-natale' }]}>
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+    <img src='fotolavoretti_logo_natale.png'>
+      <h1>Offerta Speciale Natale!</h1>
+      <p class="subtitle">Crea le tue card di Natale personalizzate.</p>
+      <p class="deadline">Disponibile fino al 22 Dicembre!</p>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="intro container">
+      <p>
+        Trasformo i disegni dei tuoi figli in auguri natalizi animati, personalizzati e pronti da condividere. 
+        Ogni cartolina nasce dal disegno originale del bambino e include animazione, musica e un messaggio speciale per le feste. 
+        Ricevi il video in formato ottimizzato, pronto da condividere su WhatsApp e Instagram (9:16).
+      </p>
+    </section>
+
+    <!-- Options Section -->
+    <section class="options container">
+      <h2>Scegli la tua animazione</h2>
+      <div class="options-grid">
+        <!-- Opzione 1 -->
+        <div class="option-card">
+          <h3>Personaggio animato</h3>
+          <video class="video-placeholder" src="/videos/animation-standard.webm" autoplay loop muted playsinline></video>
+          <p class="description">  
+          Un personaggio creato dal tuo piccolo prende vita e lo saluta con un messaggio standard: lo ringrazia per averlo disegnato e gli augura un felice Natale, in un video unico e pieno di magia.        
+          </p>          
+          <p>Durata: 15–20 secondi.<p>
+          <div class="includes">
+            <h4>Cosa include:</h4>
+            <ul>
+              <li>Video ottimizzato (WhatsApp / Instagram)</li>
+              <li>Immagine quadrata del saluto natalizio (ideale per post e messaggi)</li>
+              <li>Clip art in regalo ricavata dal disegno del bambino, per usarla nei tuoi progetti personali</li>
+            </ul>
+          </div>
+          <div class="requirements">
+            <h4>Cosa mi serve:</h4>
+            <ul>
+              <li>Foto del disegno del personaggio creato dal bambino nella migliore qualità possibile</li>
+            </ul>
+          </div>
+          <p class="price">15</p>
+          <a href="#ordina" class="cta-button">Prenota Opzione 1</a>
+        </div>
+
+        <!-- Opzione 2 -->
+        <div class="option-card highlight">
+          <h3>Babbo Natale animato</h3>
+          <video class="video-placeholder" src="/videos/animation-custom.webm" autoplay loop muted playsinline></video>
+          <p class="description">
+          Un Babbo Natale disegnato dal tuo piccolo prende vita e gli rivolge un messaggio personalizzato, citando il suo nome, con auguri di Buon Natale divertenti e affettuosi.
+          </p>
+          <p>Durata: 15–20 secondi.<p>
+          <div class="includes">
+            <h4>Cosa include:</h4>
+            <ul>
+              <li>Video ottimizzato (WhatsApp / Instagram)</li>
+              <li>Immagine quadrata del saluto natalizio (ideale per post e messaggi)</li>
+              <li>Clip art in regalo ricavata dal disegno del bambino, per usarla nei tuoi progetti personali</li>
+            </ul>
+          </div>
+          <div class="requirements">
+            <h4>Cosa mi serve:</h4>
+            <ul>
+              <li>Foto del disegno di Babbo Natale realizzato dal bambino</li>
+              <li>Nome del bambino per il messaggio personalizzato</li>
+            </ul>
+          </div>
+          <p class="price">20</p>
+          <a href="#ordina" class="cta-button">Prenota Opzione 2</a>
+        </div>
+
+        <!-- Opzione 3 -->
+        <div class="option-card">
+          <h3>Disegno natalizio animato con audio familiare</h3>
+          <video class="video-placeholder" src="/videos/animation-standard.webm" autoplay loop muted playsinline></video>
+          <p class="description">
+          Un disegno natalizio creato dal tuo piccolo si anima con effetti magici, accompagnato da una musica delicata, mentre la farfalla di fotolavoretti introduce e lascia spazio all’ascolto del tuo audio di auguri per queste feste
+          </p>
+          <p>Durata: 15–25 secondi.<p>
+          <div class="includes">
+            <h4>Cosa include:</h4>
+            <ul>
+              <li>Video ottimizzato (WhatsApp / Instagram)</li>
+              <li>Immagine quadrata del saluto natalizio (ideale per post e messaggi)</li>
+              <li>Clip art in regalo ricavata dal disegno del bambino, per usarla nei tuoi progetti personali</li>
+            </ul>
+          </div>
+          <div class="requirements">
+            <h4>Cosa mi serve:</h4>
+            <ul>
+              <li>Foto del disegno natalizio realizzato dal bambino</li>
+              <li>Audio con il tuo messaggio di auguri</li>
+            </ul>
+          </div>
+          <p class="price">25</p>
+          <a href="#ordina" class="cta-button">Prenota Opzione 3</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Instructions Section -->
+    <section class="instructions container">
+      <h2>Come funziona</h2>
+      <div class="instructions-grid">
+        <div class="instruction-step">
+          <h4>1. Scegli la tua cartolina</h4>
+          <p>Clicca sul pulsante del prodotto che preferisci per compilare il modulo d’ordine. Ti contatteremo al più presto.</p>
+        </div>
+        <div class="instruction-step">
+          <h4>2. Inviaci foto e audio e conferma il pagamento</h4>
+          <p>Ti contatteremo tramite Instagram o WhatsApp, secondo la tua preferenza indicata nel modulo. Ti chiederemo di inviarci le foto o l’audio necessari e ti invieremo il pulsante per il pagamento. La ricezione di questi materiali e del pagamento conferma ufficialmente il tuo ordine, e ti invieremo la conferma.</p>
+        </div>
+        <div class="instruction-step">
+          <h4>3. Ricevi il tuo prodotto</h4>
+          <p>Entro i tempi indicati consegneremo il tuo prodotto finito, pronto da condividere e utilizzare.</p>
+        </div>
+      </div>
+    </section>
+
+
+
   </main>
 </Layout>
 
 <style>
-  main {
-    padding: 4rem 2rem;
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Hero Section */
+  .hero {
+    text-align: center;
+    padding: 4rem 2rem;    
+    color: black;
+  }
+  .hero img {
+    object-fit: contain;
+    height:30rem;
+    weight: 30rem;
+  }
+  .hero h1 {
+    font-size: var(--font-size-xl);
+    color: blue;
+    margin: 0;
+  }
+  .hero .subtitle {
+    font-size: var(--font-size-md);
+    margin: 0.5rem 0;
+  }
+  .hero .deadline {
+    font-size: var(--font-size-base);
+    font-weight: var(--fw-bold);
+    color: var(--color-primary);
+  }
+
+  /* Intro Section */
+  .intro {
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: var(--font-size-md);
+    line-height: 1.7;
+  }
+
+  /* Options Section */
+  .options {
+    padding: 3rem 2rem;
+    text-align: center;
+    background-color: #f9f9f9;
+  }
+  .options h2 {
+    margin-bottom: 2rem;
+    font-size: var(--font-size-lg);
+  }
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  .option-card {
+    background: white;
+    border: 1px solid var(--color-accent);
+    border-radius: 8px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+  }
+  .option-card.highlight {
+    border-color: var(--color-primary);
+    border-width: 2px;
+  }
+  .option-card h3 {
+    font-size: var(--font-size-md);
+    color: var(--color-secondary);
+    margin-top: 0;
+  }
+  .option-card .description {
+    font-size: var(--font-size-sm);
+    min-height: 50px;
+  }
+  .option-card .includes {
+    margin: 1rem 0;
+  }
+  .option-card .includes h4 {
+    font-weight: var(--fw-semibold);
+    margin-bottom: 0.5rem;
+  }
+  .option-card .includes ul {
+    list-style: '✓';
+    padding-left: 1.5rem;
+    font-size: var(--font-size-sm);
+  }
+  .option-card .includes ul li {
+    padding-left: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+  .option-card .price {
+    font-size: var(--font-size-lg);
+    font-weight: var(--fw-bold);
+    color: var(--color-primary);
+    margin: auto 0 1.5rem 0;
     text-align: center;
   }
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
+  .cta-button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: var(--color-primary);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: var(--fw-semibold);
+    margin-top: auto; /* Pushes button to the bottom */
   }
-  h1 {
-    font-size: var(--font-size-xl);
+  .cta-button:hover {
+    background-color: var(--color-secondary);
+  }
+
+  /* Instructions Section */
+  .instructions {
+    padding: 4rem 2rem;
+  }
+  .instructions h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: var(--font-size-lg);
+  }
+  .instructions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    text-align: center;
+  }
+  .instruction-step h4 {
+    font-size: var(--font-size-md);
     color: var(--color-secondary);
   }
-  p {
-    font-size: var(--font-size-md);
+
+  .video-placeholder {
+    width: 100%;
+    border-radius: 6px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--color-accent);
+    background-color: black; /* To ensure a black background if video doesn't load instantly */
+  }
+
+  /* Order Form Placeholder */
+  #ordina {
+      padding: 3rem 2rem;
+      text-align: center;
+      background-color: #f9f9f9;
   }
 </style>

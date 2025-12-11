@@ -1,0 +1,60 @@
+---
+interface Props {
+  links: { text: string; href: string }[];
+}
+
+const { links } = Astro.props;
+---
+
+<nav class="breadcrumbs">
+  <ol>
+    {links.map((link, index) => (
+      <li>
+        {index < links.length - 1 ? (
+          <a href={link.href}>{link.text}</a>
+        ) : (
+          <span>{link.text}</span>
+        )}
+        {index < links.length - 1 && <span class="separator">/</span>}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs {
+    padding: 1rem 0;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-accent);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+  }
+  .breadcrumbs ol {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 1000px; /* Match container width */
+    margin: 0 auto;
+    padding: 0 2rem; /* Match container padding */
+  }
+  .breadcrumbs li {
+    display: flex;
+    align-items: center;
+  }
+  .breadcrumbs a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-weight: var(--fw-medium);
+  }
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumbs span {
+    color: var(--color-text);
+  }
+  .breadcrumbs .separator {
+    margin: 0 0.5rem;
+    color: var(--color-accent);
+  }
+</style>
