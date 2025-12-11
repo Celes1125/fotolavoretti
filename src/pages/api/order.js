@@ -16,6 +16,8 @@ export async function POST({ request }) {
     language,
     gdprConsent,
     dataProcessingConsent,
+    termsAccepted,
+    cancellationPolicyAccepted,
     portfolioConsent,
     photoProcessingConsent,
     address,
@@ -41,9 +43,9 @@ export async function POST({ request }) {
   }
 
   // Mandatory consents must be true
-  if (!gdprConsent || !dataProcessingConsent) {
+  if (!gdprConsent || !dataProcessingConsent || !termsAccepted || !cancellationPolicyAccepted) {
     return new Response(
-      JSON.stringify({ error: "Mandatory consents are required" }),
+      JSON.stringify({ error: "Per procedere, è necessario accettare tutti i termini e le condizioni obbligatori." }),
       { status: 400 },
     );
   }
@@ -87,19 +89,13 @@ export async function POST({ request }) {
           <p><b>Gestione dei lavoretti:</b> ${artwork_handling}</p>
           <p><b>Dettagli:</b> ${details || "Nessuno"}</p>
           <hr>
-          <h3>Consensi GDPR</h3>
-          <p><b>Ho letto e compreso l’Informativa GDPR e la Privacy Policy:</b> ${
-            gdprConsent ? "Sì" : "No"
-          }</p>
-          <p><b>Acconsento al trattamento dei miei dati e del minore per la gestione della richiesta:</b> ${
-            dataProcessingConsent ? "Sì" : "No"
-          }</p>
-          <p><b>Acconsento all’uso delle immagini dei lavoretti sui social (anonimizzato):</b> ${
-            portfolioConsent ? "Sì" : "No"
-          }</p>
-          <p><b>Acconsento all’uso della fotografia del minore, se fornita, solo nel prodotto richiesto:</b> ${
-            photoProcessingConsent ? "Sì" : "No"
-          }</p>
+          <h3>Consensi</h3>
+          <p><b>Letta Informativa GDPR/Privacy:</b> ${gdprConsent ? "Sì" : "No"}</p>
+          <p><b>Consenso Trattamento Dati:</b> ${dataProcessingConsent ? "Sì" : "No"}</p>
+          <p><b>Accettati Termini del Servizio:</b> ${termsAccepted ? "Sì" : "No"}</p>
+          <p><b>Accettata Politica di Cancellazione:</b> ${cancellationPolicyAccepted ? "Sì" : "No"}</p>
+          <p><b>Consenso Uso Social (Anonimo):</b> ${portfolioConsent ? "Sì" : "No"}</p>
+          <p><b>Consenso Foto Minore (Solo Prodotto):</b> ${photoProcessingConsent ? "Sì" : "No"}</p>
         `,
       }),
     });

@@ -3,10 +3,14 @@ export const prerender = false;
 
 export async function POST({ request }) {
   const data = await request.json();
-  const { name, email, message, phone, timeSlot, language } = data || {};
+  const { name, email, message, phone, timeSlot, language, gdprConsent } = data || {};
 
   if (!name || !email || !message) {
     return new Response(JSON.stringify({ error: "Missing fields" }), { status: 400 });
+  }
+
+  if (!gdprConsent) {
+    return new Response(JSON.stringify({ error: "Consenso al trattamento dei dati non fornito." }), { status: 400 });
   }
 
   // Conditionally build phone contact info

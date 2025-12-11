@@ -15,6 +15,8 @@ export default function OrderForm({ selectedPackage }) {
     language: "italiano",
     gdprConsent: false,
     dataProcessingConsent: false,
+    termsAccepted: false,
+    cancellationPolicyAccepted: false,
     portfolioConsent: false,
     photoProcessingConsent: false,
     address: "",
@@ -22,6 +24,7 @@ export default function OrderForm({ selectedPackage }) {
   });
   const [status, setStatus] = useState(null);
   const [showForm, setShowForm] = useState(true);
+  const [consentError, setConsentError] = useState(null);
 
   // Unified change handler for all inputs
   const handleChange = (e) => {
@@ -43,19 +46,19 @@ export default function OrderForm({ selectedPackage }) {
 
       return newForm;
     });
+
+    // Clear consent error when user starts checking boxes
+    if (type === "checkbox") {
+      setConsentError(null);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate mandatory consents
-    if (!form.gdprConsent || !form.dataProcessingConsent) {
-      setStatus({
-        type: "error",
-        message:
-          "Devi accettare l'Informativa sul trattamento dei dati personali e il consenso al trattamento dei dati per poter inviare l'ordine.",
-      });
-      setShowForm(false);
+    if (!form.gdprConsent || !form.dataProcessingConsent || !form.termsAccepted || !form.cancellationPolicyAccepted) {
+      setConsentError("Per procedere, è necessario accettare tutti i termini e le condizioni obbligatori.");
       return;
     }
 
@@ -71,10 +74,10 @@ export default function OrderForm({ selectedPackage }) {
         message: "Grazie per il tuo ordine, ti contatteremo al più presto.",
       });
     } else {
+      const errorData = await res.json();
       setStatus({
         type: "error",
-        message:
-          "Il tuo ordine non ha potuto essere inviato, riprova più tardi. Ci scusiamo per il disagio.",
+        message: errorData.error || "Il tuo ordine non ha potuto essere inviato, riprova più tardi. Ci scusiamo per il disagio.",
       });
     }
     setShowForm(false);
@@ -93,6 +96,8 @@ export default function OrderForm({ selectedPackage }) {
       language: "italiano",
       gdprConsent: false,
       dataProcessingConsent: false,
+      termsAccepted: false,
+      cancellationPolicyAccepted: false,
       portfolioConsent: false,
       photoProcessingConsent: false,
       address: "",
@@ -100,6 +105,7 @@ export default function OrderForm({ selectedPackage }) {
     });
     setStatus(null);
     setShowForm(true);
+    setConsentError(null);
   };
 
   return (
@@ -230,77 +236,62 @@ export default function OrderForm({ selectedPackage }) {
             </option>
           </select>
 
-          {/* GDPR and Privacy Section */}
-          <div className="form-section">
-            <h3>Consenso Privacy e GDPR</h3>
-            <p>
-              Scarica l'informativa completa:{" "}
-              <a
-                href="/informativa_GDPR_privacy_fotolavoretti.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Informativa GDPR e Privacy
-              </a>
-            </p>
+          {/* Consent Section */}
+          <div className="form-section consent-section">
+            <h3>Consensi e Termini</h3>
 
-            {/* Mandatory Checkboxes */}
-            <p>Obbligatorie:</p>
-            <div className="form-control">
-              <label>
-                <input
-                  type="checkbox"
-                  name="gdprConsent"
-                  checked={form.gdprConsent}
-                  onChange={handleChange}
-                  required
-                />
-                Ho letto e compreso l’Informativa GDPR e la Privacy Policy di
-                fotolavoretti.
-              </label>
-            </div>
-            <div className="form-control">
-              <label>
-                <input
-                  type="checkbox"
-                  name="dataProcessingConsent"
-                  checked={form.dataProcessingConsent}
-                  onChange={handleChange}
-                  required
-                />
-                Acconsento al trattamento dei miei dati e dei dati del minore,
-                se forniti, per la gestione della richiesta e dei prodotti
-                richiesti.
-              </label>
+            {/* Mandatory GDPR */}
+            <div className="consent-group">
+              <h4>Consensi Obbligatori (Privacy e GDPR)</h4>
+              <div className="form-control">
+                <label>
+                  <input type="checkbox" name="gdprConsent" checked={form.gdprConsent} onChange={handleChange} required />
+                  Ho letto e compreso l’Informativa GDPR e la <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ display: 'inline', padding: 0, background: 'transparent', color: '#ddb74e', border: 'none', borderRadius: 0, textDecoration: 'underline' }}><strong>Privacy Policy</strong></a> di fotolavoretti.
+                </label>
+              </div>
+              <div className="form-control">
+                <label>
+                  <input type="checkbox" name="dataProcessingConsent" checked={form.dataProcessingConsent} onChange={handleChange} required />
+                  Acconsento al trattamento dei miei dati e dei dati del minore, se forniti, per la gestione della richiesta e dei prodotti richiesti.
+                </label>
+              </div>
             </div>
 
-            {/* Optional Checkboxes */}
-            <p>Opzionali:</p>
-            <div className="form-control">
-              <label>
-                <input
-                  type="checkbox"
-                  name="portfolioConsent"
-                  checked={form.portfolioConsent}
-                  onChange={handleChange}
-                />
-                Acconsento all’uso delle immagini dei lavoretti sui social di
-                fotolavoretti, in forma anonimizzata.
-              </label>
+            {/* Mandatory Terms */}
+            <div className="consent-group">
+              <h4>Consensi Obbligatori (Termini e Condizioni)</h4>
+              <div className="form-control">
+                <label>
+                  <input type="checkbox" name="termsAccepted" checked={form.termsAccepted} onChange={handleChange} required />
+                  Ho letto e accetto i <a href="/terms-of-service" target="_blank" rel="noopener noreferrer" style={{ display: 'inline', padding: 0, background: 'transparent', color: '#ddb74e', border: 'none', borderRadius: 0, textDecoration: 'underline' }}><strong>Termini del Servizio</strong></a>.
+                </label>
+              </div>
+              <div className="form-control">
+                <label>
+                  <input type="checkbox" name="cancellationPolicyAccepted" checked={form.cancellationPolicyAccepted} onChange={handleChange} required />
+                  Confermo di aver letto e accetto la <a href="/politica-di-cancellazione" target="_blank" rel="noopener noreferrer" style={{ display: 'inline', padding: 0, background: 'transparent', color: '#ddb74e', border: 'none', borderRadius: 0, textDecoration: 'underline' }}><strong>Politica di cancellazione e di non rimborso</strong></a> per prodotti digitali.
+                </label>
+              </div>
             </div>
-            <div className="form-control">
-              <label>
-                <input
-                  type="checkbox"
-                  name="photoProcessingConsent"
-                  checked={form.photoProcessingConsent}
-                  onChange={handleChange}
-                />
-                Acconsento all’uso della fotografia del minore, qualora venga
-                fornita, esclusivamente nel prodotto richiesto. Le fotografie
-                del minore non saranno mai utilizzate sui social.
-              </label>
+
+            {/* Optional Consents */}
+            <div className="consent-group">
+              <h4>Consensi Opzionali</h4>
+              <div className="form-control">
+                <label>
+                  <input type="checkbox" name="portfolioConsent" checked={form.portfolioConsent} onChange={handleChange} />
+                  Acconsento all’uso delle immagini dei lavoretti sui social di fotolavoretti, in forma anonimizzata.
+                </label>
+              </div>
+              <div className="form-control">
+                <label>
+                  <input type="checkbox" name="photoProcessingConsent" checked={form.photoProcessingConsent} onChange={handleChange} />
+                  Acconsento all’uso della fotografia del minore, qualora venga fornita, esclusivamente nel prodotto richiesto. Le fotografie del minore non saranno mai utilizzate sui social.
+                </label>
+              </div>
             </div>
+
+            {consentError && <p className="error-message">{consentError}</p>}
           </div>
 
           <textarea
