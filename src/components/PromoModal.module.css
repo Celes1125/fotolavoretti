@@ -1,0 +1,99 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modal {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  border: 1px solid var(--color-accent);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  color: var(--color-accent);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem; /* Keep this gap */
+}
+
+.image {
+  width: 25rem; /* Increased size */
+  height: 25rem; /* Increased size */
+  object-fit: contain;
+  /* Removed margin-bottom to rely solely on gap */
+}
+
+.content h2 {
+  color: var(--color-secondary);
+  font-size: var(--font-size-lg);
+  margin: 0;
+}
+
+.content p {
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  margin: 0.1rem 0;
+}
+
+.deadline {
+  font-weight: var(--fw-semibold);
+  color: var(--color-danger);
+}
+
+.ctaButton {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  font-size: var(--font-size-md);
+  border-radius: 8px;
+  font-weight: var(--fw-semibold);
+  margin-top: 1.5rem;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.ctaButton:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-2px);
+}
