@@ -23,20 +23,8 @@ export default function ChristmasOrderForm({ selectedOption }) {
   const [consentError, setConsentError] = useState(null);
 
   useEffect(() => {
-    console.log('ChristmasOrderForm: Attaching event listener.');
-    const handleOptionSelect = (e) => {
-      console.log('ChristmasOrderForm: Event received with option:', e.detail.option);
-      setForm(prevForm => ({ ...prevForm, option: e.detail.option }));
-    };
-
-    document.addEventListener('select-christmas-option', handleOptionSelect);
-
-    // Cleanup the event listener on component unmount
-    return () => {
-      console.log('ChristmasOrderForm: Cleaning up event listener.');
-      document.removeEventListener('select-christmas-option', handleOptionSelect);
-    };
-  }, []);
+    setForm(prevForm => ({ ...prevForm, option: selectedOption }));
+  }, [selectedOption]);
 
   const handleChange = (e) => {
     const { name, type, checked, value } = e.target;

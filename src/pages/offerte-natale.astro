@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ChristmasOrderForm from '../components/forms/ChristmasOrderForm.jsx';
+import ChristmasOrderModal from '../components/forms/ChristmasOrderModal.jsx';
 ---
 
 <Layout title="Offerta Speciale Natale" breadcrumbs={[{ text: 'Home', href: '/' }, { text: 'Offerta Speciale Natale', href: '/offerte-natale' }]}>
@@ -127,41 +127,22 @@ import ChristmasOrderForm from '../components/forms/ChristmasOrderForm.jsx';
       </div>
     </section>
 
-    <!-- Christmas Order Form -->
-    <section id="ordina" class="order-form-section container">
-        <ChristmasOrderForm client:load />
-    </section>
+    <ChristmasOrderModal client:load />
 
   </main>
 </Layout>
 
 <script>
-    document.addEventListener('astro:page-load', () => {
-        const formSection = document.getElementById('ordina');
-        if (formSection) {
-            formSection.style.display = 'none'; // Hide form initially
-        }
-
-        const buttons = document.querySelectorAll('.cta-button[data-option]');
-        buttons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                const selectedOption = button.getAttribute('data-option');
-                
-                if (formSection) {
-                    formSection.style.display = 'block';
-                }
-
-                // Dispatch a custom event with the selected option
-                console.log(`Dispatching event with option: ${selectedOption}`);
-                const event = new CustomEvent('select-christmas-option', { detail: { option: selectedOption } });
-                document.dispatchEvent(event);
-
-                // Scroll to the form
-                if (formSection) {
-                    formSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
+    const buttons = document.querySelectorAll('.cta-button[data-option]');
+    buttons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const selectedOption = button.getAttribute('data-option');
+            
+            // Dispatch a custom event to open the modal
+            console.log(`Dispatching event to open modal with option: ${selectedOption}`);
+            const event = new CustomEvent('open-christmas-modal', { detail: { option: selectedOption } });
+            document.dispatchEvent(event);
         });
     });
 </script>
@@ -186,7 +167,7 @@ import ChristmasOrderForm from '../components/forms/ChristmasOrderForm.jsx';
   .hero img {
     object-fit: contain;
     height:30rem;
-    weight: 30rem;
+    width: 30rem;
   }
   .hero h1 {
     font-size: var(--font-size-xl);
