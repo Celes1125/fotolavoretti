@@ -166,8 +166,7 @@ import ChristmasOrderModal from '../components/forms/ChristmasOrderModal.jsx';
     const header = card.querySelector('.card-header');
     header.addEventListener('click', () => {
       // This only runs on mobile where the header is clickable
-      if (window.innerWidth < 768) {
-        const cardName = card.getAttribute('data-card-name');
+      if (window.innerWidth < 1024) {
         const isOpen = card.classList.contains('open');
         
         // Close all cards
@@ -332,7 +331,7 @@ import ChristmasOrderModal from '../components/forms/ChristmasOrderModal.jsx';
   .instruction-step h4 { font-size: var(--font-size-md); color: var(--color-secondary); }
 
   /* Mobile-specific accordion styles */
-  @media (max-width: 768px) {
+  @media (max-width: 1023px) {
     .options-container {
       width: 100%;
       padding: 2rem 1rem;
