@@ -7,7 +7,7 @@ import ChristmasOrderModal from '../components/forms/ChristmasOrderModal.jsx';
   <main>
     <!-- Hero Section -->
     <section class="hero">
-    <img src='/fotolavoretti_logo_natale.png'>
+      <img src='/fotolavoretti_logo_natale.png' alt="Logo Natalizio Fotolavoretti">
       <h1>Offerta Speciale Natale!</h1>
       <p class="subtitle">Crea le tue card di Natale personalizzate.</p>
       <p class="deadline">Disponibile fino al 22 Dicembre!</p>
@@ -23,87 +23,102 @@ import ChristmasOrderModal from '../components/forms/ChristmasOrderModal.jsx';
     </section>
 
     <!-- Options Section -->
-    <section class="options container">
-      <h2>Scegli la tua animazione</h2>
-      <div class="options-grid">
+    <section class="options-container">
+      <h2 class="main-title">Scegli la tua animazione</h2>
+      <div class="cards-grid">
         <!-- Opzione 1 -->
-        <div class="option-card">
-          <h3>Personaggio animato</h3>
-          <video class="video-placeholder" src="/videos/animation-standard.webm" autoplay loop muted playsinline></video>
-          <p class="description">  
-          Un personaggio creato dal tuo piccolo prende vita e lo saluta con un messaggio standard: lo ringrazia per averlo disegnato e gli augura un felice Natale, in un video unico e pieno di magia.        
-          </p>          
-          <p>Durata: 15–20 secondi.<p>
-          <div class="includes">
-            <h4>Cosa include:</h4>
-            <ul>
-              <li>Video ottimizzato (WhatsApp / Instagram)</li>
-              <li>Immagine quadrata del saluto natalizio (ideale per post e messaggi)</li>
-              <li>Clip art in regalo ricavata dal disegno del bambino, per usarla nei tuoi progetti personali</li>
-            </ul>
+        <div class="card" data-card-name="Opzione 1">
+          <div class="card-header">
+            <h3 class="package-name">Personaggio animato</h3>
           </div>
-          <div class="requirements">
-            <h4>Cosa mi serve:</h4>
-            <ul>
-              <li>Foto del disegno del personaggio creato dal bambino nella migliore qualità possibile</li>
-            </ul>
+          <div class="collapsible-content">
+            <div class="card-body">
+              <video class="video-placeholder" src="/videos/animation-standard.webm" autoplay loop muted playsinline></video>
+              <p class="description">Un personaggio creato dal tuo piccolo prende vita e lo saluta con un messaggio standard: lo ringrazia per averlo disegnato e gli augura un felice Natale.</p>
+              <p>Durata: 15–20 secondi.</p>
+              <div class="features-section">
+                <p class="section-label">Include:</p>
+                <ul>
+                  <li><span class="check-icon">✔</span>Video ottimizzato (WhatsApp / Instagram)</li>
+                  <li><span class="check-icon">✔</span>Immagine quadrata del saluto natalizio</li>
+                  <li><span class="check-icon">✔</span>Clip art in regalo ricavata dal disegno</li>
+                </ul>
+              </div>
+              <div class="target-section">
+                <p class="section-label">Cosa mi serve:</p>
+                <ul>
+                  <li><span class="check-icon">👉</span>Foto del disegno del personaggio</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="cta-button" data-option="1">Prenota Opzione 1 (€15)</button>
+            </div>
           </div>
-          <p class="price">15</p>
-          <a href="#" class="cta-button" data-option="1">Prenota Opzione 1</a>
         </div>
 
         <!-- Opzione 2 -->
-        <div class="option-card highlight">
-          <h3>Babbo Natale animato</h3>
-          <video class="video-placeholder" src="/videos/animation-custom.webm" autoplay loop muted playsinline></video>
-          <p class="description">
-          Un Babbo Natale disegnato dal tuo piccolo prende vita e gli rivolge un messaggio personalizzato, citando il suo nome, con auguri di Buon Natale divertenti e affettuosi.
-          </p>
-          <p>Durata: 15–20 secondi.<p>
-          <div class="includes">
-            <h4>Cosa include:</h4>
-            <ul>
-              <li>Video ottimizzato (WhatsApp / Instagram)</li>
-              <li>Immagine quadrata del saluto natalizio (ideale per post e messaggi)</li>
-              <li>Clip art in regalo ricavata dal disegno del bambino, per usarla nei tuoi progetti personali</li>
-            </ul>
+        <div class="card highlighted" data-card-name="Opzione 2">
+          <div class="card-header">
+            <h3 class="package-name">Babbo Natale animato</h3>
           </div>
-          <div class="requirements">
-            <h4>Cosa mi serve:</h4>
-            <ul>
-              <li>Foto del disegno di Babbo Natale realizzato dal bambino</li>
-              <li>Nome del bambino per il messaggio personalizzato</li>
-            </ul>
+          <div class="collapsible-content">
+            <div class="card-body">
+              <video class="video-placeholder" src="/videos/animation-custom.webm" autoplay loop muted playsinline></video>
+              <p class="description">Un Babbo Natale disegnato dal tuo piccolo prende vita e gli rivolge un messaggio personalizzato, citando il suo nome.</p>
+              <p>Durata: 15–20 secondi.</p>
+              <div class="features-section">
+                <p class="section-label">Include:</p>
+                <ul>
+                  <li><span class="check-icon">✔</span>Video ottimizzato (WhatsApp / Instagram)</li>
+                  <li><span class="check-icon">✔</span>Immagine quadrata del saluto natalizio</li>
+                  <li><span class="check-icon">✔</span>Clip art in regalo ricavata dal disegno</li>
+                </ul>
+              </div>
+              <div class="target-section">
+                <p class="section-label">Cosa mi serve:</p>
+                <ul>
+                  <li><span class="check-icon">👉</span>Foto del disegno di Babbo Natale</li>
+                  <li><span class="check-icon">👉</span>Nome del bambino</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="cta-button" data-option="2">Prenota Opzione 2 (€20)</button>
+            </div>
           </div>
-          <p class="price">20</p>
-          <a href="#" class="cta-button" data-option="2">Prenota Opzione 2</a>
         </div>
 
         <!-- Opzione 3 -->
-        <div class="option-card">
-          <h3>Disegno natalizio animato con audio familiare</h3>
-          <video class="video-placeholder" src="/videos/animation-standard.webm" autoplay loop muted playsinline></video>
-          <p class="description">
-          Un disegno natalizio creato dal tuo piccolo si anima con effetti magici, accompagnato da una musica delicata, mentre la farfalla di fotolavoretti introduce e lascia spazio all’ascolto del tuo audio di auguri per queste feste
-          </p>
-          <p>Durata: 15–25 secondi.<p>
-          <div class="includes">
-            <h4>Cosa include:</h4>
-            <ul>
-              <li>Video ottimizzato (WhatsApp / Instagram)</li>
-              <li>Immagine quadrata del saluto natalizio (ideale per post e messaggi)</li>
-              <li>Clip art in regalo ricavata dal disegno del bambino, per usarla nei tuoi progetti personali</li>
-            </ul>
+        <div class="card" data-card-name="Opzione 3">
+          <div class="card-header">
+            <h3 class="package-name">Disegno con audio familiare</h3>
           </div>
-          <div class="requirements">
-            <h4>Cosa mi serve:</h4>
-            <ul>
-              <li>Foto del disegno natalizio realizzato dal bambino</li>
-              <li>Audio con il tuo messaggio di auguri</li>
-            </ul>
+          <div class="collapsible-content">
+            <div class="card-body">
+              <video class="video-placeholder" src="/videos/animation-standard.webm" autoplay loop muted playsinline></video>
+              <p class="description">Un disegno natalizio si anima con effetti magici, accompagnato dall’audio di auguri della tua famiglia.</p>
+              <p>Durata: 15–25 secondi.</p>
+              <div class="features-section">
+                <p class="section-label">Include:</p>
+                <ul>
+                  <li><span class="check-icon">✔</span>Video ottimizzato (WhatsApp / Instagram)</li>
+                  <li><span class="check-icon">✔</span>Immagine quadrata del saluto natalizio</li>
+                  <li><span class="check-icon">✔</span>Clip art in regalo ricavata dal disegno</li>
+                </ul>
+              </div>
+              <div class="target-section">
+                <p class="section-label">Cosa mi serve:</p>
+                <ul>
+                  <li><span class="check-icon">👉</span>Foto del disegno natalizio</li>
+                  <li><span class="check-icon">👉</span>Audio con il tuo messaggio di auguri</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="cta-button" data-option="3">Prenota Opzione 3 (€25)</button>
+            </div>
           </div>
-          <p class="price">25</p>
-          <a href="#" class="cta-button" data-option="3">Prenota Opzione 3</a>
         </div>
       </div>
     </section>
@@ -118,11 +133,11 @@ import ChristmasOrderModal from '../components/forms/ChristmasOrderModal.jsx';
         </div>
         <div class="instruction-step">
           <h4>2. Inviaci foto e audio e conferma il pagamento</h4>
-          <p>Ti contatteremo tramite Instagram o WhatsApp, secondo la tua preferenza indicata nel modulo. Ti chiederemo di inviarci le foto o l’audio necessari e ti invieremo il pulsante per il pagamento. La ricezione di questi materiali e del pagamento conferma ufficialmente il tuo ordine, e ti invieremo la conferma.</p>
+          <p>Ti contatteremo tramite Instagram o WhatsApp, secondo la tua preferenza. Ti chiederemo i materiali e ti invieremo il link per il pagamento per confermare l'ordine.</p>
         </div>
         <div class="instruction-step">
           <h4>3. Ricevi il tuo prodotto</h4>
-          <p>Entro i tempi indicati consegneremo il tuo prodotto finito, pronto da condividere e utilizzare.</p>
+          <p>Entro i tempi indicati consegneremo il tuo prodotto finito, pronto da condividere.</p>
         </div>
       </div>
     </section>
@@ -133,181 +148,227 @@ import ChristmasOrderModal from '../components/forms/ChristmasOrderModal.jsx';
 </Layout>
 
 <script>
-    const buttons = document.querySelectorAll('.cta-button[data-option]');
-    buttons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            const selectedOption = button.getAttribute('data-option');
-            
-            // Dispatch a custom event to open the modal
-            console.log(`Dispatching event to open modal with option: ${selectedOption}`);
-            const event = new CustomEvent('open-christmas-modal', { detail: { option: selectedOption } });
-            document.dispatchEvent(event);
-        });
+  // Modal script
+  const modalButtons = document.querySelectorAll('.cta-button[data-option]');
+  modalButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation(); // Prevent click from bubbling up to the card header
+      const selectedOption = button.getAttribute('data-option');
+      const event = new CustomEvent('open-christmas-modal', { detail: { option: selectedOption } });
+      document.dispatchEvent(event);
     });
+  });
+
+  // Accordion script
+  const allCards = document.querySelectorAll('.card');
+  allCards.forEach(card => {
+    const header = card.querySelector('.card-header');
+    header.addEventListener('click', () => {
+      // This only runs on mobile where the header is clickable
+      if (window.innerWidth < 768) {
+        const cardName = card.getAttribute('data-card-name');
+        const isOpen = card.classList.contains('open');
+        
+        // Close all cards
+        allCards.forEach(c => c.classList.remove('open'));
+
+        // If the clicked card was not open, open it
+        if (!isOpen) {
+          card.classList.add('open');
+        }
+      }
+    });
+  });
 </script>
 
 <style>
-  .order-form-section {
-      padding-top: 3rem;
-      padding-bottom: 3rem;
-  }
+  /* General Container */
   .container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
 
-  /* Hero Section */
-  .hero {
-    text-align: center;
-    padding: 4rem 2rem;    
-    color: black;
-  }
-  .hero img {
-    object-fit: contain;
-    height:30rem;
-    width: 30rem;
-  }
-  .hero h1 {
-    font-size: var(--font-size-xl);
-    color: blue;
-    margin: 0;
-  }
-  .hero .subtitle {
-    font-size: var(--font-size-md);
-    margin: 0.5rem 0;
-  }
-  .hero .deadline {
-    font-size: var(--font-size-base);
-    font-weight: var(--fw-bold);
-    color: var(--color-primary);
-  }
+  /* Hero Section (Existing Styles) */
+  .hero { text-align: center; padding: 4rem 2rem; color: black; }
+  .hero img { object-fit: contain; height:30rem; width: 30rem; }
+  .hero h1 { font-size: var(--font-size-xl); color: blue; margin: 0; }
+  .hero .subtitle { font-size: var(--font-size-md); margin: 0.5rem 0; }
+  .hero .deadline { font-size: var(--font-size-base); font-weight: var(--fw-bold); color: var(--color-primary); }
 
-  /* Intro Section */
-  .intro {
-    padding: 3rem 2rem;
-    text-align: center;
-    font-size: var(--font-size-md);
-    line-height: 1.7;
-  }
+  /* Intro Section (Existing Styles) */
+  .intro { widht: 60%; margin: auto; padding: 0; text-align: center; font-size: var(--font-size-lg); line-height: 1.5; }
 
-  /* Options Section */
-  .options {
-    padding: 3rem 2rem;
+  /* New Options Section Styles */
+  .options-container {
+    width: 90vw;
+    max-width: 1100px;
+    margin: auto;
+    padding: 3rem 1rem;
     text-align: center;
-    background-color: #f9f9f9;
   }
-  .options h2 {
-    margin-bottom: 2rem;
+  .main-title {
     font-size: var(--font-size-lg);
+    font-weight: var(--fw-bold);
+    color: var(--color-text);
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--color-accent);
+    padding-bottom: 0.5rem;
+    display: inline-block;
   }
-  .options-grid {
+  .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
+    align-items: stretch;
   }
-  .option-card {
-    background: white;
-    border: 1px solid var(--color-accent);
-    border-radius: 8px;
-    padding: 2rem;
+  .card {
+    background: var(--color-background);
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.04);
     display: flex;
     flex-direction: column;
-    text-align: left;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid var(--color-accent);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
   }
-  .option-card:hover {
+  .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.06);
   }
-  .option-card.highlight {
-    border-color: var(--color-primary);
-    border-width: 2px;
+  .card.highlighted {
+    border: 2px solid var(--color-primary);
   }
-  .option-card h3 {
+  .card.highlighted .package-name {
+    color: var(--color-primary);
+  }
+  .card-header {
+    padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+    border-bottom: 1px solid var(--color-accent);
+    text-align: center;
+  }
+  .package-name {
     font-size: var(--font-size-md);
-    color: var(--color-secondary);
-    margin-top: 0;
+    margin: 0 0 10px 0;
+    color: var(--color-text);
+    font-weight: var(--fw-semibold);
+  }
+  .collapsible-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .card-body {
+    padding: 1.5rem;
+    flex-grow: 1;
+    text-align: left;
   }
   .video-placeholder {
     width: 100%;
     border-radius: 6px;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     border: 1px solid var(--color-accent);
-    background-color: black; /* To ensure a black background if video doesn't load instantly */
   }
-  .option-card .description {
+  .description {
     font-size: var(--font-size-sm);
-    min-height: 50px;
+    color: var(--color-secondary);
+    font-style: italic;
+    margin-bottom: 1.5rem;
   }
-  .option-card .includes {
-    margin: 1rem 0;
-  }
-    .option-card .requirements {
-    margin: 1rem 0;
-  }
-  .option-card .includes h4,
-  .option-card .requirements h4 {
+  .section-label {
     font-weight: var(--fw-semibold);
-    margin-bottom: 0.5rem;
-  }
-  .option-card .includes ul,
-  .option-card .requirements ul {
-    list-style: '✓';
-    padding-left: 1.5rem;
+    color: var(--color-text);
     font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    margin-top: 0;
   }
-    .option-card .requirements ul {
-    list-style-type: '👉';
+  .features-section ul, .target-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
   }
-  .option-card .includes ul li,
-  .option-card .requirements ul li {
-    padding-left: 0.5rem;
-    margin-bottom: 0.3rem;
+  .features-section li, .target-section li {
+    margin-bottom: 0.8rem;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
   }
-  .option-card .price {
-    font-size: var(--font-size-lg);
-    font-weight: var(--fw-bold);
+  .check-icon {
+    color: var(--color-secondary);
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  .card.highlighted .check-icon {
     color: var(--color-primary);
-    margin: auto 0 1.5rem 0;
-    text-align: center;
+  }
+  .card-footer {
+    padding: 1.5rem;
+    margin-top: auto;
   }
   .cta-button {
-    display: block;
     width: 100%;
     padding: 1rem;
-    background: var(--color-primary);
-    color: white;
-    text-align: center;
-    text-decoration: none;
+    border: none;
     border-radius: 6px;
+    background-color: var(--color-primary);
+    color: white;
     font-weight: var(--fw-semibold);
-    margin-top: auto; /* Pushes button to the bottom */
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   .cta-button:hover {
     background-color: var(--color-secondary);
   }
 
-  /* Instructions Section */
-  .instructions {
-    padding: 4rem 2rem;
-  }
-  .instructions h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: var(--font-size-lg);
-  }
-  .instructions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    text-align: center;
-  }
-  .instruction-step h4 {
-    font-size: var(--font-size-md);
-    color: var(--color-secondary);
+  /* Instructions Section (Existing Styles) */
+  .instructions { padding: 4rem 2rem; }
+  .instructions h2 { text-align: center; margin-bottom: 2rem; font-size: var(--font-size-lg); }
+  .instructions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; text-align: center; }
+  .instruction-step h4 { font-size: var(--font-size-md); color: var(--color-secondary); }
+
+  /* Mobile-specific accordion styles */
+  @media (max-width: 768px) {
+    .options-container {
+      width: 100%;
+      padding: 2rem 1rem;
+    }
+    .cards-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .card-header {
+      cursor: pointer;
+      position: relative;
+    }
+    .card-header::after {
+      content: '+';
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      color: var(--color-secondary);
+      font-weight: var(--fw-light);
+    }
+    .card.open .card-header::after {
+      content: '−';
+    }
+    .collapsible-content {
+      display: block;
+      flex-grow: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+    }
+    .card.open .collapsible-content {
+      max-height: 1000px; /* Large enough to fit content */
+      transition: max-height 0.5s ease-in;
+    }
   }
 </style>
