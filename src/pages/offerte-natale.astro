@@ -34,7 +34,7 @@ import ChristmasOrderModal from '../components/forms/ChristmasOrderModal.jsx';
           </div>
           <div class="collapsible-content">
             <div class="card-body">
-              <video class="video-placeholder" src="/videos/animation-standard.webm" autoplay loop muted playsinline></video>
+              <video class="video-placeholder" src="/videos/card_standar.mp4" autoplay loop playsinline controls muted></video>
               <p class="description">Un personaggio creato dal tuo piccolo prende vita e lo saluta con un messaggio standard: lo ringrazia per averlo disegnato e gli augura un felice Natale.</p>
               <p class="description">*Durata totale: 15–20 secondi (contenuto principale < 15 s).</p> 
               <p class="description">*Formato verticale 9:16 • HD • MP4 </p>
@@ -71,7 +71,7 @@ import ChristmasOrderModal from '../components/forms/ChristmasOrderModal.jsx';
           </div>
           <div class="collapsible-content">
             <div class="card-body">
-              <video class="video-placeholder" src="/videos/animation-custom.webm" autoplay loop muted playsinline></video>
+              <video class="video-placeholder" src="/videos/card_speciale.mp4" autoplay loop playsinline controls muted></video>
               <p class="description">Una versione ancora più speciale: il personaggio prende vita con un messaggio scelto da te, pensato su misura per il tuo bambino.
   Un augurio animato unico, più lungo e più personale, da conservare e condividere.</p>
               <p class="description">*Durata totale: 30–50 secondi (contenuto principale < 30 s).</p>
@@ -281,9 +281,12 @@ import ChristmasOrderModal from '../components/forms/ChristmasOrderModal.jsx';
     text-align: left;
   }
   .video-placeholder {
-    width: 100%;
+    max-width: 100%;
+    max-height: 250px;
+    width: auto;
+    margin: 0 auto 1.5rem auto;
+    display: block;
     border-radius: 6px;
-    margin-bottom: 1.5rem;
     border: 1px solid var(--color-accent);
   }
   .description {
