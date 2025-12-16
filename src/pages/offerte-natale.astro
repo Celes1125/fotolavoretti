@@ -18,41 +18,47 @@ import ChristmasOrderModal from '../components/forms/ChristmasOrderModal.jsx';
       <p>
         Trasformo i disegni dei tuoi figli in auguri natalizi animati, personalizzati e pronti da condividere. 
         Ogni cartolina nasce dal disegno originale del bambino e include animazione, musica e un messaggio speciale per le feste. 
-        Ricevi il video in formato ottimizzato, pronto da condividere su WhatsApp e Instagram (9:16).
+        Ricevi il video in formato ottimizzato, pronto da condividere sui social.
       </p>
     </section>
 
     <!-- Options Section -->
     <section class="options-container">
-      <h2 class="main-title">Scegli la tua animazione</h2>
+      <h2 class="main-title">Scegli la tua card</h2>
       <div class="cards-grid">
         <!-- Opzione 1 -->
         <div class="card" data-card-name="Opzione 1">
           <div class="card-header">
-            <h3 class="package-name">Personaggio animato</h3>
+          <h3 class="package-public">DEDICATA AL BAMBINO</h3>
+            <h3 class="package-name">Standar</h3>
           </div>
           <div class="collapsible-content">
             <div class="card-body">
               <video class="video-placeholder" src="/videos/animation-standard.webm" autoplay loop muted playsinline></video>
               <p class="description">Un personaggio creato dal tuo piccolo prende vita e lo saluta con un messaggio standard: lo ringrazia per averlo disegnato e gli augura un felice Natale.</p>
-              <p>Durata: 15–20 secondi.</p>
+              <p class="description">*Durata totale: 15–20 secondi (contenuto principale < 15 s).</p> 
+              <p class="description">*Formato verticale 9:16 • HD • MP4 </p>
+              <p class="description">*Messaggio standard con musica • Personalizzato con il nome del bambino</p>
+
+             
               <div class="features-section">
                 <p class="section-label">Include:</p>
-                <ul>
-                  <li><span class="check-icon">✔</span>Video ottimizzato (WhatsApp / Instagram)</li>
-                  <li><span class="check-icon">✔</span>Immagine quadrata del saluto natalizio</li>
-                  <li><span class="check-icon">✔</span>Clip art in regalo ricavata dal disegno</li>
+                <ul>  
+                  <li><span class="check-icon">✔</span>Video verticale animato (la card)</li>
+                  <li><span class="check-icon">✔</span>Immagine social dal disegno del bambino</li>
+                  <li><span class="check-icon">✔</span>Clip art in regalo</li>
                 </ul>
               </div>
               <div class="target-section">
                 <p class="section-label">Cosa mi serve:</p>
                 <ul>
                   <li><span class="check-icon">👉</span>Foto del disegno del personaggio</li>
+                  <li><span class="check-icon">👉</span>Nome del bambino</li>
                 </ul>
               </div>
             </div>
             <div class="card-footer">
-              <button class="cta-button" data-option="1">Prenota Opzione 1 (€15)</button>
+              <button class="cta-button" data-option="1">Prenota card standar (€15)</button>
             </div>
           </div>
         </div>
@@ -60,51 +66,60 @@ import ChristmasOrderModal from '../components/forms/ChristmasOrderModal.jsx';
         <!-- Opzione 2 -->
         <div class="card highlighted" data-card-name="Opzione 2">
           <div class="card-header">
-            <h3 class="package-name">Babbo Natale animato</h3>
+           <h3 class="package-public">DEDICATA AL BAMBINO</h3>
+            <h3 class="package-name">Speciale</h3>
           </div>
           <div class="collapsible-content">
             <div class="card-body">
               <video class="video-placeholder" src="/videos/animation-custom.webm" autoplay loop muted playsinline></video>
-              <p class="description">Un Babbo Natale disegnato dal tuo piccolo prende vita e gli rivolge un messaggio personalizzato, citando il suo nome.</p>
-              <p>Durata: 15–20 secondi.</p>
+              <p class="description">Una versione ancora più speciale: il personaggio prende vita con un messaggio scelto da te, pensato su misura per il tuo bambino.
+  Un augurio animato unico, più lungo e più personale, da conservare e condividere.</p>
+              <p class="description">*Durata totale: 30–50 secondi (contenuto principale < 30 s).</p>
+              <p class="description">*Video consegnato in formato verticale (9:16) e orizzontale (16:9) • HD • MP4 </p>
+              <p class="description">*Messaggio e musica a scelta del cliente • Inclusa la menzione del nome del bambino</p>
+
               <div class="features-section">
                 <p class="section-label">Include:</p>
-                <ul>
-                  <li><span class="check-icon">✔</span>Video ottimizzato (WhatsApp / Instagram)</li>
-                  <li><span class="check-icon">✔</span>Immagine quadrata del saluto natalizio</li>
-                  <li><span class="check-icon">✔</span>Clip art in regalo ricavata dal disegno</li>
-                </ul>
+                 <li><span class="check-icon">✔</span> Card animata in doppio formato: verticale (9:16) e orizzontale (16:9)</li>                 
+                  <li><span class="check-icon">✔</span>Immagine social dal disegno del bambino</li>
+                  <li><span class="check-icon">✔</span>Clip art in regalo</li>
               </div>
               <div class="target-section">
                 <p class="section-label">Cosa mi serve:</p>
                 <ul>
-                  <li><span class="check-icon">👉</span>Foto del disegno di Babbo Natale</li>
+                  <li><span class="check-icon">👉</span>Foto del disegno del personaggio</li>
                   <li><span class="check-icon">👉</span>Nome del bambino</li>
+                    <li><span class="check-icon">👉</span> Testo per il messaggio vocale del personaggio</li>
+                    <li><span class="check-icon">👉</span> Musica a scelta</li>
                 </ul>
               </div>
             </div>
             <div class="card-footer">
-              <button class="cta-button" data-option="2">Prenota Opzione 2 (€20)</button>
+              <button class="cta-button" data-option="2">Prenota Card Speciale (€25)</button>
             </div>
           </div>
         </div>
+         
 
         <!-- Opzione 3 -->
         <div class="card" data-card-name="Opzione 3">
           <div class="card-header">
-            <h3 class="package-name">Disegno con audio familiare</h3>
+          <h3 class="package-public">DEDICATA ALLA FAMIGLIA</h3>
+            <h3 class="package-name">Famiglia</h3>
           </div>
           <div class="collapsible-content">
             <div class="card-body">
               <video class="video-placeholder" src="/videos/animation-standard.webm" autoplay loop muted playsinline></video>
-              <p class="description">Un disegno natalizio si anima con effetti magici, accompagnato dall’audio di auguri della tua famiglia.</p>
-              <p>Durata: 15–25 secondi.</p>
+              <p class="description">Un disegno natalizio si anima con effetti magici, accompagnato dall’audio di auguri che ci invierai.</p>
+               <p class="description">*Durata totale: 30–60 secondi (secondo il tempo del tuo saluto in audio).</p>
+              <p class="description">*Video consegnato in formato orizzontale (16:9) • HD • MP4 </p>
+              <p class="description">*Messaggio, testo e musica a scelta del cliente</p>
               <div class="features-section">
                 <p class="section-label">Include:</p>
                 <ul>
-                  <li><span class="check-icon">✔</span>Video ottimizzato (WhatsApp / Instagram)</li>
-                  <li><span class="check-icon">✔</span>Immagine quadrata del saluto natalizio</li>
-                  <li><span class="check-icon">✔</span>Clip art in regalo ricavata dal disegno</li>
+                  <li><span class="check-icon">✔</span> Card animata in formato orizzontale (16:9)</li>                 
+                  <li><span class="check-icon">✔</span>Immagine social dal disegno del bambino</li>
+                  <li><span class="check-icon">✔</span>Clip art in regalo</li>
                 </ul>
               </div>
               <div class="target-section">
@@ -112,11 +127,13 @@ import ChristmasOrderModal from '../components/forms/ChristmasOrderModal.jsx';
                 <ul>
                   <li><span class="check-icon">👉</span>Foto del disegno natalizio</li>
                   <li><span class="check-icon">👉</span>Audio con il tuo messaggio di auguri</li>
+                  <li><span class="check-icon">👉</span>Testo da inserire nel video (opzionale)</li>
+                  <li><span class="check-icon">👉</span>Musica a scelta da inserire nel video (opzionale)</li>
                 </ul>
               </div>
             </div>
             <div class="card-footer">
-              <button class="cta-button" data-option="3">Prenota Opzione 3 (€25)</button>
+              <button class="cta-button" data-option="3">Prenota Card Famiglia (€20)</button>
             </div>
           </div>
         </div>

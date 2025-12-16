@@ -34,11 +34,6 @@ export default function ChristmasOrderForm({ selectedOption }) {
         [name]: type === "checkbox" ? checked : value,
       };
 
-      // If option is 1, clear childName
-      if (name === "option" && value === "1") {
-        newForm.childName = "";
-      }
-
       return newForm;
     });
 
@@ -114,9 +109,9 @@ export default function ChristmasOrderForm({ selectedOption }) {
           <div className="form-control-column">
             <label htmlFor="option-select">Scegli la tua opzione:</label>
             <select id="option-select" name="option" value={form.option} onChange={handleChange} required>
-              <option value="1">Opzione 1: Personaggio animato</option>
-              <option value="2">Opzione 2: Babbo Natale animato</option>
-              <option value="3">Opzione 3: Disegno con audio familiare</option>
+              <option value="1">Opzione 1: card standar (€15)</option>
+              <option value="2">Opzione 2: card speciale (€25)</option>
+              <option value="3">Opzione 3: card famiglia(€20)</option>
             </select>
           </div>
 
@@ -181,7 +176,7 @@ export default function ChristmasOrderForm({ selectedOption }) {
             />
           )}
           
-          {(form.option === "2" || form.option === "3") && (
+          {(form.option === "1" || form.option === "2") && (
             <input
               name="childName"
               type="text"
