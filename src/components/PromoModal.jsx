@@ -32,7 +32,7 @@ export default function PromoModal() {
         <div className={styles.content}>
           <img src="fotolavoretti_logo_natale.png" alt="Christmas Offer" className={styles.image} />
           <h2>Offerta Speciale Natale!</h2>
-          <p>Crea le tue card di Natale personalizzate.</p>
+          <p>Crea le tue cartoline di Natale personalizzate.</p>
           <p className={styles.deadline}>Disponibile fino al 22 Dicembre!</p>
           <a href="/offerte-natale" className={styles.ctaButton}>
             Vedi l'offerta
