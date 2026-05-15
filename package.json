@@ -9,10 +9,20 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^4.4.2",
-    "@astrojs/vercel": "^9.0.2",
-    "astro": "^5.15.9",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "@astrojs/react": "^5.0.5",
+    "@astrojs/vercel": "^10.0.7",
+    "astro": "^6.3.2",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "pnpm": {
+    "overrides": {
+      "path-to-regexp": "^6.3.0",
+      "devalue": "^5.8.1"
+    }
+  },
+  "resolutions": {
+    "path-to-regexp": "^6.3.0",
+    "devalue": "^5.8.1"
   }
 }
