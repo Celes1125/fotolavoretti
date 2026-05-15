@@ -20,7 +20,11 @@
     "overrides": {
       "path-to-regexp": "^6.3.0",
       "devalue": "^5.8.1"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   },
   "resolutions": {
     "path-to-regexp": "^6.3.0",
