@@ -2,7 +2,16 @@
 export const prerender = false;
 
 export async function POST({ request }) {
-  const data = await request.json();
+  // Safe parsing block to catch empty payloads early
+  let data;
+  try {
+    data = await request.json();
+  } catch (parseError) {
+    return new Response(JSON.stringify({ error: "Invalid JSON format payload" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" }
+    });
+  }
 
   const {
     name,
@@ -28,6 +37,7 @@ export async function POST({ request }) {
   if (!name || !email || !pkg || !delivery || !artwork_handling || !phone || !timeSlot) {
     return new Response(JSON.stringify({ error: "Missing required fields" }), {
       status: 400,
+      headers: { "Content-Type": "application/json" }
     });
   }
 
@@ -38,7 +48,7 @@ export async function POST({ request }) {
   ) {
     return new Response(
       JSON.stringify({ error: "Address and delivery time are required for home delivery" }),
-      { status: 400 },
+      { status: 400, headers: { "Content-Type": "application/json" } },
     );
   }
 
@@ -46,7 +56,7 @@ export async function POST({ request }) {
   if (!gdprConsent || !dataProcessingConsent || !termsAccepted || !cancellationPolicyAccepted) {
     return new Response(
       JSON.stringify({ error: "Per procedere, è necessario accettare tutti i termini e le condizioni obbligatori." }),
-      { status: 400 },
+      { status: 400, headers: { "Content-Type": "application/json" } },
     );
   }
   
@@ -59,12 +69,22 @@ export async function POST({ request }) {
     `
       : "";
 
+  // Runtime structural guard check for the API key string
+  const apiKey = import.meta.env.BREVO_API_KEY;
+  if (!apiKey) {
+    console.error("Critical Runtime Error: BREVO_API_KEY environment variable is missing on the server.");
+    return new Response(JSON.stringify({ error: "Server environmental configuration is broken." }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" }
+    });
+  }
+
   try {
     // 1) Enviar email a vos con el pedido
     const emailRes = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       headers: {
-        "api-key": import.meta.env.BREVO_API_KEY,
+        "api-key": apiKey,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -80,7 +100,7 @@ export async function POST({ request }) {
           <p><b>Email:</b> ${email}</p>
           <p><b>Lingua preferita:</b> ${language}</p>
           <p><b>Telefono:</b> ${phone}</p>
-          <p><b>Fascia oraria per contatto:</b> ${timeSlot}</p>
+          <p><b>Fascia oraria per contacto:</b> ${timeSlot}</p>
           <hr>
           <h3>Dettagli dell'ordine</h3>
           <p><b>Pacchetto:</b> ${pkg}</p>
@@ -102,8 +122,14 @@ export async function POST({ request }) {
 
     if (!emailRes.ok) {
       const errorBody = await emailRes.json();
-      console.error("Brevo email API error:", errorBody);
-      throw new Error("Email failed");
+      console.error("Brevo email API failure details:", errorBody);
+      return new Response(JSON.stringify({ 
+        error: "External communication failure with email provider.", 
+        details: errorBody.message || "Unauthorized / Refused" 
+      }), {
+        status: emailRes.status,
+        headers: { "Content-Type": "application/json" }
+      });
     }
 
     // 2) Guardar contacto en Brevo (optional step)
@@ -122,7 +148,7 @@ export async function POST({ request }) {
       const contactRes = await fetch("https://api.brevo.com/v3/contacts", {
         method: "POST",
         headers: {
-          "api-key": import.meta.env.BREVO_API_KEY,
+          "api-key": apiKey,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(contactPayload),
@@ -131,19 +157,20 @@ export async function POST({ request }) {
       if (!contactRes.ok) {
         const errorBody = await contactRes.json();
         console.error("Brevo contact API error:", errorBody);
-        // Do not re-throw, just log the error
       }
     } catch (contactError) {
       console.error("Failed to create/update Brevo contact:", contactError);
-      // Do not re-throw, just log the error
     }
 
-    return new Response(JSON.stringify({ message: "OK" }), { status: 200 });
+    return new Response(JSON.stringify({ message: "OK" }), { 
+      status: 200,
+      headers: { "Content-Type": "application/json" }
+    });
   } catch (e) {
-    console.error("Main API error:", e);
-    return new Response(JSON.stringify({ error: "Server error" }), {
+    console.error("Main API runtime catch exception:", e);
+    return new Response(JSON.stringify({ error: "Internal Server Processing Error", executionDetails: e.message }), {
       status: 500,
+      headers: { "Content-Type": "application/json" }
     });
   }
 }
-
