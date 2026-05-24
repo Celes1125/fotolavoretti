@@ -2,7 +2,15 @@
 export const prerender = false;
 
 export async function POST({ request }) {
-  const data = await request.json();
+  let data;
+  try {
+    data = await request.json();
+  } catch (parseError) {
+    return new Response(JSON.stringify({ error: "Invalid JSON format payload" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" }
+    });
+  }
 
   const {
     option,
@@ -24,28 +32,39 @@ export async function POST({ request }) {
   if (!option || !customerName || !contactMethod) {
     return new Response(JSON.stringify({ error: "I campi obbligatori del modulo non sono stati compilati." }), {
       status: 400,
+      headers: { "Content-Type": "application/json" }
     });
   }
 
   if (contactMethod === 'whatsapp' && !phone) {
     return new Response(JSON.stringify({ error: "Il numero di telefono è obbligatorio se si sceglie WhatsApp." }), {
       status: 400,
+      headers: { "Content-Type": "application/json" }
     });
   }
 
   if (contactMethod === 'instagram' && !instagram) {
     return new Response(JSON.stringify({ error: "L'handle di Instagram è obbligatorio se si sceglie Instagram." }), {
       status: 400,
+      headers: { "Content-Type": "application/json" }
     });
   }
-
 
   // Mandatory consents must be true
   if (!gdprConsent || !dataProcessingConsent || !termsAccepted || !cancellationPolicyAccepted) {
     return new Response(
       JSON.stringify({ error: "Per procedere, è necessario accettare tutti i termini e le condizioni obbligatori." }),
-      { status: 400 },
+      { status: 400, headers: { "Content-Type": "application/json" } },
     );
+  }
+
+  const apiKey = import.meta.env.BREVO_API_KEY;
+  if (!apiKey) {
+    console.error("Critical Runtime Error: BREVO_API_KEY environment variable is missing on the server.");
+    return new Response(JSON.stringify({ error: "Server environmental configuration is broken." }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" }
+    });
   }
 
   const optionText = {
@@ -58,12 +77,11 @@ export async function POST({ request }) {
     ? `<p><b>Contatto WhatsApp:</b> ${phone}</p>`
     : `<p><b>Contatto Instagram:</b> ${instagram}</p>`;
 
-
   try {
     const emailRes = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       headers: {
-        "api-key": import.meta.env.BREVO_API_KEY,
+        "api-key": apiKey,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -95,17 +113,27 @@ export async function POST({ request }) {
     });
 
     if (!emailRes.ok) {
-      const errorBody = await emailRes.json();
-      console.error("Brevo email API error:", errorBody);
-      throw new Error("Email failed");
+      const errorBody = await emailRes.json().catch(() => ({ message: "Could not parse error response" }));
+      console.error("Brevo email API failure details:", errorBody);
+      return new Response(JSON.stringify({ 
+        error: "External communication failure with email provider.", 
+        details: errorBody.message || "Unauthorized / Refused" 
+      }), {
+        status: emailRes.status,
+        headers: { "Content-Type": "application/json" }
+      });
     }
 
-    return new Response(JSON.stringify({ message: "OK" }), { status: 200 });
+    return new Response(JSON.stringify({ message: "OK" }), { 
+      status: 200,
+      headers: { "Content-Type": "application/json" }
+    });
 
   } catch (e) {
-    console.error("Main API error:", e);
-    return new Response(JSON.stringify({ error: "Server error" }), {
+    console.error("Main API runtime catch exception:", e);
+    return new Response(JSON.stringify({ error: "Internal Server Processing Error", executionDetails: e.message }), {
       status: 500,
+      headers: { "Content-Type": "application/json" }
     });
   }
 }
