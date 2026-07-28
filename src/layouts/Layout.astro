@@ -1,5 +1,8 @@
 ---
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { inject } from '@vercel/analytics';
+
+inject();
 
 interface Props {
 	title: string;
